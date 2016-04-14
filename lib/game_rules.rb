@@ -8,7 +8,6 @@ class Game_Rules
     return :playing
   end
 
-
   def tied?(game_board)
     if game_board.full? && !winner?(game_board)
       return true
