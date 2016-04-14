@@ -2,6 +2,13 @@ require 'game_board'
 
 class Game_Rules
 
+  def game_status(game_board)
+    return winner?(game_board) if winner?(game_board)
+    return :tied if tied?(game_board)
+    return :playing
+  end
+
+
   def tied?(game_board)
     if game_board.full? && !winner?(game_board)
       return true

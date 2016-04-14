@@ -5,6 +5,27 @@ describe Game_Rules do
   let(:test_rules) { Game_Rules.new }
   let(:test_board) { Game_Board.new(3) }
 
+  describe "game_status " do
+    it "game_status returns :playing when playing " do
+      expect(test_rules.game_status(test_board)).to eq(:playing)
+    end
+
+    it "game_status returns 'X' when X is the winner " do
+      test_board.spaces[6] = 'X'
+      test_board.spaces[7] = 'X'
+      test_board.spaces[8] = 'X'
+      expect(test_rules.game_status(test_board)).to eq('X')
+    end
+
+    it "game_status returns :tied when game is tied " do
+      test_board.clear('T')
+      test_board.spaces[4] = 'X'
+      test_board.spaces[0] = 'O'
+      test_board.spaces[8] = 'e'
+      expect(test_rules.game_status(test_board)).to eq(:tied)
+    end
+  end
+
   describe "testing 3 in a row / col " do
     it "check_win_row returns 'X' when 3 in a row " do
       test_board.spaces[6] = 'X'
