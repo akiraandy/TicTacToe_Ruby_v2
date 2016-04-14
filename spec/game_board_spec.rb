@@ -3,7 +3,6 @@ require 'game_board'
 describe Game_Board do
   let(:test_board) { Game_Board.new(3) }
 
-
   describe "playing spaces " do
     it "Has 9 spaces for a 3x3 board " do
       expect(test_board.size).to eq(9)
@@ -25,7 +24,6 @@ describe Game_Board do
   end
 
   describe "clearing board, checking full/empty, number of moves free " do
-
     it "clears the board " do
       test_board.clear('T')
       expect(test_board.spaces).to eq(["T","T","T","T","T","T","T","T","T"])
@@ -51,6 +49,19 @@ describe Game_Board do
     it "empty? returns false if board is not empty " do
       test_board.spaces[5] = 'T'
       expect(test_board.empty?).to eq(false)
+    end
+  end
+
+  describe "larger sized boards " do
+    let (:board4x4) { Game_Board.new(4) }
+    it "size is 16 for a 4x4 board " do
+      expect(board4x4.size).to eq(16)
+    end
+    it "grid_size = 4 in a 4x4 board " do
+      expect(board4x4.grid_size).to eq(4)
+    end
+    it "empty returns true on an empty 4x4 board " do
+      expect(board4x4.empty?).to eq(true)
     end
   end
 end

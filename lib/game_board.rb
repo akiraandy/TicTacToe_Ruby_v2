@@ -3,8 +3,8 @@ class Game_Board
   attr_accessor :spaces
   attr_accessor :grid_size
 
-  def initialize(grid_size)
-    @grid_size = 3
+  def initialize(grid_size = 3)
+    @grid_size = grid_size
     clear
   end
 
