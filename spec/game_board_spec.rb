@@ -3,6 +3,14 @@ require 'game_board'
 describe Game_Board do
   let(:test_board) { Game_Board.new(3) }
 
+  describe "deep copy " do
+    it "makes a deep copy " do
+      test_board_2 = test_board.deep_copy
+      test_board.clear('t')
+      expect(test_board_2.spaces[1]).to eq(' ')
+    end
+  end
+
   describe "playing spaces " do
     it "Has 9 spaces for a 3x3 board " do
       expect(test_board.size).to eq(9)
