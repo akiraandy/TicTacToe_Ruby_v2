@@ -1,5 +1,4 @@
 require 'ai_basic'
-require 'game_io'
 require 'game_board'
 require 'game_state'
 
