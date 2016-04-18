@@ -1,5 +1,5 @@
 
-class Game_Io
+class GameIo
 
   def print_board(spaces, grid_size)
     rtn_string = "\n"

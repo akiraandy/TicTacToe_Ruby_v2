@@ -1,10 +1,10 @@
 require 'game_board'
 require 'game_rules'
 
-describe Game_Rules do
+describe GameRules do
 
-  let(:test_board) { Game_Board.new(3) }
-  let(:test_rules) { Game_Rules.new(test_board) }
+  let(:test_board) { GameBoard.new(3) }
+  let(:test_rules) { GameRules.new(test_board) }
 
   describe "game_status " do
     it "game_status returns :playing when playing " do

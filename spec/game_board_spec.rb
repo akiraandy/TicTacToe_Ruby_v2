@@ -1,7 +1,7 @@
 require 'game_board'
 
-describe Game_Board do
-  let(:test_board) { Game_Board.new(3) }
+describe GameBoard do
+  let(:test_board) { GameBoard.new(3) }
 
   describe "deep copy " do
     it "makes a deep copy " do
@@ -61,7 +61,7 @@ describe Game_Board do
   end
 
   describe "larger sized boards " do
-    let (:board4x4) { Game_Board.new(4) }
+    let (:board4x4) { GameBoard.new(4) }
     it "size is 16 for a 4x4 board " do
       expect(board4x4.size).to eq(16)
     end

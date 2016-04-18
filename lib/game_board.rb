@@ -1,4 +1,4 @@
-class Game_Board
+class GameBoard
 
   attr_accessor :spaces
   attr_accessor :grid_size
@@ -9,7 +9,7 @@ class Game_Board
   end
 
   def deep_copy
-    temp_board = Game_Board.new(@grid_size)
+    temp_board = GameBoard.new(@grid_size)
     @spaces.each.with_index do |val, i|
       temp_board.spaces[i] = val
     end

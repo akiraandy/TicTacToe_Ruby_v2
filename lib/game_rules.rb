@@ -1,6 +1,6 @@
 require 'game_board'
 
-class Game_Rules
+class GameRules
 
   def initialize (game_board)
     @board = game_board
