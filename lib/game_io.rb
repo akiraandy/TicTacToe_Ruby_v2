@@ -1,6 +1,9 @@
 
 class GameIo
 
+  def initialize
+    @wrapper = WrapperStdio.new
+  end
   def print_board(spaces, grid_size)
     rtn_string = "\n"
     spaces.each.with_index do |val, i|
@@ -11,16 +14,26 @@ class GameIo
       end
       rtn_string << "\n" if ((i + 1) % grid_size == 0)
     end
-    puts rtn_string
+    @wrapper.puts_message(rtn_string)
     rtn_string
   end
 
   def clear_screen
-    system("clear")
+    @wrapper.clear_screen
   end
 
-  def print_message(print_string)
-    print print_string
+  def puts_message(puts_string)
+    @wrapper.puts_message(puts_string)
+  end
+
+  def get_input
+    @wrapper.get_input
+  end
+end
+
+class WrapperStdio
+  def clear_screen
+    system("clear")
   end
 
   def puts_message(puts_string)
