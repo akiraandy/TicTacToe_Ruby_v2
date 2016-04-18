@@ -2,12 +2,12 @@ require 'ai_basic'
 require 'game_board'
 require 'game_state'
 
-describe Ai_Basic do
+describe AiBasic do
 
-  let (:test_ai) { Ai_Basic.new() }
-  let (:test_state) { Game_State.new(Game_Board.new , 'X', 'O') }
+  let (:test_ai) { AiBasic.new() }
+  let (:test_state) { GameState.new(GameBoard.new , 'X', 'O') }
 
-=begin
+
   describe "playing moves " do
     it "returns 0 (top corner) on empty board " do
       expect(test_ai.play_move(test_state)).to eq(0)
@@ -30,5 +30,4 @@ describe Ai_Basic do
       expect(test_ai.play_move(test_state).class).to eq(Fixnum)
     end
   end
-=end
 end
