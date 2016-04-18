@@ -21,6 +21,16 @@ describe AiBasic do
     end
   end
 
+  describe "playing a random move " do
+    it "plays a radnom move if it can't win, block, or play a corner " do
+      spaces[0] = spaces[5] = spaces[6] = spaces[7] = 'X'
+      spaces[2] = spaces[3] = spaces[8] = 'O'
+      test_state.switch_turns
+      move = test_ai.play_move(test_state)
+      expect(move.class).to eq(Fixnum)
+    end
+  end
+
   describe "plays winning move if it can " do
 
     it "returns 0 if 1 and 2 are 'X' " do

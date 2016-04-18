@@ -13,16 +13,24 @@ class AiBasic
     choice = play_to_win if choice.nil?
     choice = play_to_block if choice.nil?
     choice = get_corner if choice.nil?
-    choice 
+    choice = get_random_move if choice.nil?
+    choice
   end
 
 private
 
+  def get_random_move
+    index = rand(0...@available_moves.size)
+    @available_moves[index]
+  end
+
   def get_corner
     corners = [0, 2, 6, 8]
     available_corners =  corners & @available_moves
-    index = rand(0...available_corners.size)
-    available_corners[index]
+    if available_corners.size > 0
+      index = rand(0...available_corners.size)
+      available_corners[index]
+    end
   end
 
   def play_to_block
