@@ -2,19 +2,13 @@ require 'game_board'
 require 'game_rules'
 
 describe Game_Rules do
-  let(:test_rules) { Game_Rules.new }
+
   let(:test_board) { Game_Board.new(3) }
+  let(:test_rules) { Game_Rules.new(test_board) }
 
   describe "game_status " do
     it "game_status returns :playing when playing " do
-      expect(test_rules.game_status(test_board)).to eq(:playing)
-    end
-
-    it "game_status returns 'X' when X is the winner " do
-      test_board.spaces[6] = 'X'
-      test_board.spaces[7] = 'X'
-      test_board.spaces[8] = 'X'
-      expect(test_rules.game_status(test_board)).to eq('X')
+      expect(test_rules.game_status).to eq(:playing)
     end
 
     it "game_status returns :tied when game is tied " do
@@ -22,88 +16,79 @@ describe Game_Rules do
       test_board.spaces[4] = 'X'
       test_board.spaces[0] = 'O'
       test_board.spaces[8] = 'e'
-      expect(test_rules.game_status(test_board)).to eq(:tied)
+      expect(test_rules.game_status).to eq(:tied)
     end
   end
 
-  describe "testing 3 in a row / col " do
-    it "check_win_row returns 'X' when 3 in a row " do
+  describe "testing winner? " do
+    it "Returns false when there is no winner " do
+      expect(test_rules.winner?).to eq(false)
+    end
+    it "Returns 'X' if player x has 3 in first col " do
+      test_board.spaces[0] = 'X'
+      test_board.spaces[3] = 'X'
       test_board.spaces[6] = 'X'
+      expect(test_rules.winner?).to eq('X')
+    end
+
+    it "Returns 'X' if player x has 3 in second col " do
+      test_board.spaces[1] = 'X'
+      test_board.spaces[4] = 'X'
       test_board.spaces[7] = 'X'
-      test_board.spaces[8] = 'X'
-      expect(test_rules.check_win_row(test_board)).to eq('X')
+      expect(test_rules.winner?).to eq('X')
     end
 
-    it "check_win_row on 5x5 board " do
-      board5x5 = Game_Board.new(5)
-      board5x5.spaces[24] = 'X'
-      board5x5.spaces[23] = 'X'
-      board5x5.spaces[22] = 'X'
-      expect(test_rules.check_win_row(board5x5)).to eq('X')
-    end
-
-    it "check_win_row returns nil when there is not 3 in a row " do
-        expect(test_rules.check_win_row(test_board)).to eq(nil)
-    end
-
-    it "check_win_col returns 'X' when 3 in a col " do
+    it "Returns 'X' if player x has 3 in third col " do
       test_board.spaces[2] = 'X'
       test_board.spaces[5] = 'X'
       test_board.spaces[8] = 'X'
-      expect(test_rules.check_win_col(test_board)).to eq('X')
+      expect(test_rules.winner?).to eq('X')
     end
 
-    it "check_win_col on 5x5 board " do
-      board5x5 = Game_Board.new(5)
-      board5x5.spaces[24] = 'X'
-      board5x5.spaces[19] = 'X'
-      board5x5.spaces[14] = 'X'
-      expect(test_rules.check_win_col(board5x5)).to eq('X')
-    end
-
-    it "check_win_col returns nil when there is not 3 in a col " do
-      expect(test_rules.check_win_col(test_board)).to eq(nil)
-    end
-
-    it "check_win_diagonal returns nil when there is no 3 in a row " do
-      expect(test_rules.check_win_diagonal(test_board)).to eq(nil)
-    end
-
-    it "check_win_diagonal returns 'X' when 3 in a row diagonal down right " do
+    it "Returns 'X' if player x has 3 in first row " do
       test_board.spaces[0] = 'X'
-      test_board.spaces[4] = 'X'
-      test_board.spaces[8] = 'X'
-      expect(test_rules.check_win_diagonal(test_board)).to eq('X')
-    end
-
-    it "check_win_diagonal returns 'X' when 3 in a row diagonal down left " do
+      test_board.spaces[1] = 'X'
       test_board.spaces[2] = 'X'
-      test_board.spaces[4] = 'X'
-      test_board.spaces[6] = 'X'
-      expect(test_rules.check_win_diagonal(test_board)).to eq('X')
+      expect(test_rules.winner?).to eq('X')
     end
 
-    it "check_win_diagonal on 5x5 board returns 'X' when 3 in a row diagonal down left " do
-      board5x5 = Game_Board.new(5)
-      board5x5.spaces[22] = 'X'
-      board5x5.spaces[18] = 'X'
-      board5x5.spaces[14] = 'X'
-      expect(test_rules.check_win_diagonal(board5x5)).to eq('X')
+    it "Returns 'X' if player x has 3 in second row " do
+      test_board.spaces[3] = 'X'
+      test_board.spaces[4] = 'X'
+      test_board.spaces[5] = 'X'
+      expect(test_rules.winner?).to eq('X')
+    end
+
+    it "Returns 'X' if player x has 3 in thrid row " do
+      test_board.spaces[6] = 'X'
+      test_board.spaces[7] = 'X'
+      test_board.spaces[8] = 'X'
+      expect(test_rules.winner?).to eq('X')
+    end
+
+    it "Returns 'X' if player x has 3 diagonal desending " do
+      test_board.spaces[0] = test_board.spaces[4] = test_board.spaces[8] = 'X'
+      expect(test_rules.winner?).to eq('X')
+    end
+
+    it "Returns 'X' if player x has 3 diagonal ascending " do
+      test_board.spaces[6] = test_board.spaces[4] = test_board.spaces[2] = 'X'
+      expect(test_rules.winner?).to eq('X')
     end
   end
 
-  describe "testing win, lose, tie " do
+  describe "testing tie? " do
 
     it "tied? returns true if the game is tied " do
       test_board.clear('T')
       test_board.spaces[4] = 'X'
       test_board.spaces[0] = 'O'
       test_board.spaces[8] = 'e'
-      expect(test_rules.tied?(test_board)).to eq(true)
+      expect(test_rules.tied?).to eq(true)
     end
 
     it "tied? returns false if game is still happening " do
-      expect(test_rules.tied?(test_board)).to eq(false)
+      expect(test_rules.tied?).to eq(false)
     end
   end
 end

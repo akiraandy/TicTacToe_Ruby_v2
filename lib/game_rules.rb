@@ -2,91 +2,57 @@ require 'game_board'
 
 class Game_Rules
 
-  def game_status(game_board)
-    return winner?(game_board) if winner?(game_board)
-    return :tied if tied?(game_board)
+  def initialize (game_board)
+    @board = game_board
+  end
+
+  def game_status
+    return winner? if winner?
+    return :tied if tied?
     return :playing
   end
 
-  def tied?(game_board)
-    if game_board.full? && !winner?(game_board)
-      return true
-    end
+  def tied?
+    @board.full? && !winner?
+  end
+
+  def winner?
+    return check_win_col if check_win_col
+    return check_win_row if check_win_row
+    return check_win_diagonal if check_win_diagonal
     false
   end
 
-  def winner?(game_board)
-    return check_win_row(game_board) if check_win_row(game_board)
-    return check_win_col(game_board) if check_win_col(game_board)
-    return check_win_diagonal(game_board) if check_win_diagonal(game_board)
+private
+
+  def check_win_col
+    spaces = @board.spaces
+    return spaces[0] if [spaces[0], spaces[3], spaces[6]].uniq.length == 1 && \
+      spaces[0] != ' '
+    return spaces[1] if [spaces[1], spaces[4], spaces[7]].uniq.length == 1 && \
+      spaces[1] != ' '
+    return spaces[2] if [spaces[2], spaces[5], spaces[8]].uniq.length == 1 && \
+      spaces[2] != ' '
+    false
   end
 
-  def check_win_row(game_board)
-    current_row = 1
-    current_space = 0
-    begin
-      begin
-        if game_board.spaces[current_space] == game_board.spaces[current_space + 1] && \
-          game_board.spaces[current_space] == game_board.spaces[current_space + 2] && \
-          !game_board.valid_move?(current_space)
-         return game_board.spaces[current_space]
-        end
-        current_space += 1
-      end while current_space + 2 < game_board.grid_size * current_row
-      current_row += 1
-      current_space = (current_row - 1) * game_board.grid_size
-    end while current_row <= game_board.grid_size
+  def check_win_row
+    spaces = @board.spaces
+    return spaces[0] if [spaces[0], spaces[1], spaces[2]].uniq.length == 1 && \
+      spaces[0] != ' '
+    return spaces[3] if [spaces[3], spaces[4], spaces[5]].uniq.length == 1 && \
+      spaces[3] != ' '
+    return spaces[6] if [spaces[6], spaces[7], spaces[8]].uniq.length == 1 && \
+      spaces[6] != ' '
+    false
   end
 
-  def check_win_col(game_board)
-    current_col = 1
-    current_space = 0
-    col_size = game_board.grid_size
-    begin
-      begin
-        if game_board.spaces[current_space] == game_board.spaces[current_space + col_size] && \
-          game_board.spaces[current_space] == game_board.spaces[current_space + (2 * col_size)] && \
-          !game_board.valid_move?(current_space)
-          return game_board.spaces[current_space]
-         end
-        current_space += col_size
-      end while current_space + 2 < col_size * current_col
-      current_col += 1
-      current_space = current_col - 1
-    end while current_col <= col_size
-  end
-
-  def check_win_diagonal(game_board)
-    grid_size = game_board.grid_size
-    for current_row in 0..(game_board.grid_size - 3)
-      for current_col in 0..(game_board.grid_size - 1)
-        current_space = current_row * grid_size + current_col
-        if current_col >= 2
-          return game_board.spaces[current_space] if check_win_diagonal_left(game_board, current_space)
-        end
-        if current_col < grid_size - 2
-          return game_board.spaces[current_space] if check_win_diagonal_right(game_board, current_space)
-        end
-      end
-    end
-    nil
-  end
-
-  def check_win_diagonal_left(game_board, space)
-    offset = game_board.grid_size - 1
-    if game_board.spaces[space] == game_board.spaces[space + offset] && \
-       game_board.spaces[space] == game_board.spaces[space + offset + offset] && \
-       !game_board.valid_move?(space)
-      return true
-    end
-  end
-
-  def check_win_diagonal_right(game_board, space)
-    offset = game_board.grid_size + 1
-    if game_board.spaces[space] == game_board.spaces[space + offset] && \
-       game_board.spaces[space] == game_board.spaces[space + offset + offset] && \
-       !game_board.valid_move?(space)
-      return true
-    end
+  def check_win_diagonal
+    spaces = @board.spaces
+    return spaces[4] if [spaces[0], spaces[4], spaces[8]].uniq.length == 1 && \
+      spaces[4] != ' '
+    return spaces[4] if [spaces[6], spaces[4], spaces[2]].uniq.length == 1 && \
+      spaces[4] != ' '
+    false
   end
 end
