@@ -7,7 +7,6 @@ describe AiBasic do
   let (:test_ai) { AiBasic.new() }
   let (:test_state) { GameState.new(GameBoard.new , 'X', 'O') }
 
-
   describe "playing moves " do
     it "returns 0 (top corner) on empty board " do
       expect(test_ai.play_move(test_state)).to eq(0)

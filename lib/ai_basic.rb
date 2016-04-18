@@ -1,9 +1,6 @@
 require 'game_rules'
 
 class AiBasic
-  def initialize
-
-  end
 
   def play_move(game_state)
     return 0 if game_state.game_board.empty?
@@ -39,5 +36,4 @@ private
     i = rand(moves.size)
     moves[i]
   end
-
 end
