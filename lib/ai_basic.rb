@@ -44,6 +44,7 @@ private
     @player, @opponent = @opponent, @player
   end
 
+# **** todo refactor this code
   def play_to_win
     if @available_moves.include?(0)
       if @spaces[1] == @spaces[2] && @spaces[1] == @player || \
