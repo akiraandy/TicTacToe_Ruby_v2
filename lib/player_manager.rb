@@ -9,10 +9,9 @@ class PlayerManager
       @myIo = game_io
       @player1 = player1
       @player2 = player2
-      @player1 = Player.new('X', :Human ) if @player1.nil?
-      @player2 = Player.new('O', :AiBasic ) if @player2.nil?
+      @player1 = Player.new('X', @myIo) if @player1.nil?
+      @player2 = AiBasic.new('O', @myIo) if @player2.nil?
       @current_player = @player1
-      @ai = AiBasic.new
   end
 
   def switch_turns
@@ -25,25 +24,8 @@ class PlayerManager
 
   def play_turn(board)
     @state = GameState.new(board, @current_player.mark, non_current_player.mark)
-    if @current_player.type == :Human
-      move = get_human_move
-    elsif @current_player.type == :AiBasic
-      move = @ai.play_move(@state)
-    end
+    move = @current_player.play_move(@state)
     board.spaces[move] = @current_player.mark
     switch_turns
-  end
-
-  private
-
-  def get_human_move
-    board = @state.game_board
-    available_moves = board.available_moves
-    @myIo.puts_message("Please input a move: ")
-    begin
-      choice = @myIo.get_input.to_i
-      @myIo.puts_message("That is not a valid move, please try again : ")
-    end until available_moves.include?(choice)
-    choice
   end
 end

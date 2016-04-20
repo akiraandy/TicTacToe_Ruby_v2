@@ -17,11 +17,11 @@ describe PlayerManager do
     end
 
     it "player1.type is :Human if no member passed in " do
-      expect(test_manager.current_player.type).to eq(:Human)
+      expect(test_manager.current_player.class).to eq(Player)
     end
 
     it "player2.type is :AiBasic if no member passed in " do
-      expect(test_manager.non_current_player.type).to eq(:AiBasic)
+      expect(test_manager.non_current_player.class).to eq(AiBasic)
     end
 
   end
