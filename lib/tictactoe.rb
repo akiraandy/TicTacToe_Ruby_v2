@@ -3,16 +3,16 @@ require 'game_board'
 require 'ai_basic'
 require 'game_state'
 require 'game_rules'
+require 'player'
+require 'player_manager'
 
 class TicTacToe
 
-  attr_reader :current_player, :myBoard
+  attr_accessor :myBoard
 
-  def initialize
+  def initialize (player1 = nil, player2 = nil)
     @myIo = GameIo.new
-    @player1 = 'X'
-    @player2 = 'O'
-    @current_player = @player1
+    @players = PlayerManager.new(@myIo, player1, player2)
     @myBoard = GameBoard.new
     @rules = GameRules.new(@myBoard)
     @ai = AiBasic.new
@@ -21,19 +21,21 @@ class TicTacToe
   def game_loop
     begin
       print_screen
-      play_turn
+      @players.play_turn(@myBoard)
     end while @rules.game_status == :playing
       print_screen
-      winner = "The winner is #{@rules.game_status}\n"
-      @myIo.puts_message(winner)
+      print_end_of_game
+      true
   end
 
-  def switch_turns
-    @current_player = (@current_player == @player1) ? @player2 : @player1
-  end
-
-  def non_current_player
-    (@current_player == @player1) ? @player2 : @player1
+  def print_end_of_game
+  outcome = @rules.game_status
+    if outcome == :tied
+      @myIo.puts_message("The Game Ended in a Tie!\n")
+    elsif outcome != :playing
+      @myIo.puts_message("The Winner is #{outcome}!\n")
+    end
+    outcome != :playing
   end
 
   def print_screen
@@ -41,26 +43,4 @@ class TicTacToe
     @myIo.puts_message("\n Tic Tac Toe ")
     @myIo.print_board(@myBoard.spaces, @myBoard.grid_size)
   end
-
-  def play_turn
-    state = GameState.new(@myBoard, @current_player, non_current_player)
-    if @current_player == @player1
-      move = get_human_move
-    else
-      move = @ai.play_move(state)
-    end
-    @myBoard.spaces[move] = @current_player
-    switch_turns
-  end
-
-  def get_human_move
-    available_moves = @myBoard.available_moves
-    @myIo.puts_message("Please input a move: ")
-    begin
-      choice = @myIo.get_input.to_i
-      @myIo.puts_message("That is not a valid move, please try again : ")
-    end until available_moves.include?(choice)
-    choice
-  end
-
 end

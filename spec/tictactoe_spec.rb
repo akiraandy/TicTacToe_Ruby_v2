@@ -1,35 +1,46 @@
 require 'tictactoe'
+require 'player'
+require 'game_io'
 
 describe TicTacToe do
+  let (:ttt) { TicTacToe.new }
+  let (:p1) { Player.new('X', :AiBasic) }
+  let (:p2) { Player.new('O', :AiBasic) }
+  let (:ttt_2) { TicTacToe.new(p1, p2)}
 
-  describe "Players " do
-
-    describe "switch_turns " do
-      it "switch_turns swaps the current_player and non_current_player " do
-        p1 = subject.current_player
-        p2 = subject.non_current_player
-        subject.switch_turns
-        test1 = (p1 == subject.non_current_player)
-        test2 = (p2 == subject.current_player)
-        expect(test1 && test2).to eq(true)
-      end
-
-      it "After play move the current player has changed " do
-        subject.switch_turns
-        next_player = subject.non_current_player
-        subject.play_turn
-        expect(next_player == subject.current_player).to eq(true)
-      end
-
-      it "After play move available_moves.size is 1 less " do
-        before_size = subject.myBoard.available_moves.size
-        subject.switch_turns
-        subject.play_turn
-        after_size = subject.myBoard.available_moves.size
-        expect((before_size - 1) == (after_size)).to eq(true)
-      end
-
+  describe "The Game Loop " do
+    it "Should complete the game loop " do
+      expect(ttt_2.game_loop).to eq(true)
     end
   end
 
+  describe "Printing end of game " do
+    it "Prints tied game when the game is tied " do
+      ttt.myBoard.spaces = ['X', 'O', "A", "b", "c", "d", "e", "f", "g"]
+      should_return = "The Game Ended in a Tie!\n"
+      expect(STDOUT).to receive(:puts).with(should_return)
+      expect(ttt.print_end_of_game).to eq(true)
+    end
+
+    it "Prints 'X' if the winner if 'X' winds " do
+      ttt.myBoard.spaces = ['X', 'X', "X", "b", "c", "d", "e", "f", "g"]
+      should_return = "The Winner is X!\n"
+      expect(STDOUT).to receive(:puts).with(should_return)
+      expect(ttt.print_end_of_game).to eq(true)
+    end
+
+    it "Prints nothing if game is still going on " do
+      expect(ttt.print_end_of_game).to eq(false)
+    end
+  end
+
+  describe "Printing the game screeen " do
+    it "Should print Tic Tac Toe and a blank board, if no moves have been played " do
+      should_return1 = "\n Tic Tac Toe "
+      should_return2 = "\n---\n---\n---\n"
+      expect(STDOUT).to receive(:puts).with(should_return1)
+      expect(STDOUT).to receive(:puts).with(should_return2)
+      ttt.print_screen
+    end
+  end
 end
