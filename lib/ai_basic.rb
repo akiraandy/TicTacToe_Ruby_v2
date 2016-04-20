@@ -8,7 +8,7 @@ class AiBasic
     @available_moves = game_state.game_board.available_moves
     @player = game_state.player
     @opponent = game_state.opponent
-
+    choice = nil
     choice = get_corner if board.empty?
     choice = play_to_win if choice.nil?
     choice = play_to_block if choice.nil?

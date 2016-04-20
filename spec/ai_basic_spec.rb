@@ -9,7 +9,7 @@ describe AiBasic do
   let(:spaces) { test_state.game_board.spaces }
   let(:corners) { [0, 2, 6, 8] }
   describe "Plays a corner " do
-    it "returns 0 (top corner) on empty board " do
+    it "returns a corner on empty board " do
       test_for_true = corners.include?(test_ai.play_move(test_state))
       expect(test_for_true).to eq(true)
     end
