@@ -1,6 +1,11 @@
 require 'game_rules'
 
 class AiBasic
+  attr_reader :mark
+
+  def initialize(mark, game_io = nil)
+    @mark = mark
+  end
 
   def play_move(game_state)
     board = game_state.game_board

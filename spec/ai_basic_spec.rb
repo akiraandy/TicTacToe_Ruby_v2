@@ -4,10 +4,17 @@ require 'game_state'
 
 describe AiBasic do
 
-  let (:test_ai) { AiBasic.new() }
+  let (:test_ai) { AiBasic.new('O') }
   let (:test_state) { GameState.new(GameBoard.new , 'X', 'O') }
   let(:spaces) { test_state.game_board.spaces }
   let(:corners) { [0, 2, 6, 8] }
+
+  describe "It has a mark " do
+    it ".mark returns 'O' " do
+      expect(test_ai.mark).to eq('O')
+    end
+  end
+
   describe "Plays a corner " do
     it "returns a corner on empty board " do
       test_for_true = corners.include?(test_ai.play_move(test_state))
@@ -276,8 +283,4 @@ describe AiBasic do
       expect(test_ai.play_move(test_state)).to eq(8)
     end
   end
-
-
-
-
 end
