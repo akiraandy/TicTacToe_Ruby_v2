@@ -24,7 +24,7 @@ class PlayerManager
   end
 
   def play_turn(board)
-    @state = GameState.new(board, @current_player, non_current_player)
+    @state = GameState.new(board, @current_player.mark, non_current_player.mark)
     if @current_player.type == :Human
       move = get_human_move
     elsif @current_player.type == :AiBasic
