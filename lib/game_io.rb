@@ -10,7 +10,7 @@ class GameIo
       if val == ' '
         rtn_string << '-'
       else
-        rtn_string << val
+        rtn_string << val.to_s
       end
       rtn_string << "\n" if ((i + 1) % grid_size == 0)
     end

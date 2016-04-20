@@ -9,11 +9,11 @@ describe PlayerManager do
 
   describe "initialize method " do
     it "player1.mark is 'X' if no member passed in " do
-      expect(test_manager.current_player.mark).to eq('X')
+      expect(test_manager.current_player.mark).to eq(:X)
     end
 
     it "player2.mark is 'O' if no member passed in " do
-      expect(test_manager.non_current_player.mark).to eq('O')
+      expect(test_manager.non_current_player.mark).to eq(:O)
     end
 
     it "player1.type is :Human if no member passed in " do
