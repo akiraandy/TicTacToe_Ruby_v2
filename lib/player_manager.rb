@@ -14,10 +14,6 @@ class PlayerManager
       @current_player = @player1
   end
 
-  def switch_turns
-    @current_player = (@current_player == @player1) ? @player2 : @player1
-  end
-
   def non_current_player
     (@current_player == @player1) ? @player2 : @player1
   end
@@ -26,6 +22,7 @@ class PlayerManager
     @state = GameState.new(board, @current_player.mark, non_current_player.mark)
     move = @current_player.play_move(@state)
     board.spaces[move] = @current_player.mark
-    switch_turns
+
+    @current_player = (@current_player == @player1) ? @player2 : @player1
   end
 end
