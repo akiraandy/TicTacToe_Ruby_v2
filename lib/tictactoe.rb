@@ -15,7 +15,6 @@ class TicTacToe
     @players = PlayerManager.new(@myIo, player1, player2)
     @myBoard = GameBoard.new
     @rules = GameRules.new(@myBoard)
-    @ai = AiBasic.new
   end
 
   def game_loop
