@@ -7,16 +7,18 @@ describe GameRules do
   let(:test_rules) { GameRules.new(test_board) }
 
   describe "game_status " do
-    it "game_status returns :playing when playing " do
-      expect(test_rules.game_status).to eq(:playing)
+    it "game_over? returns false if game is not over " do
+      expect(test_rules.game_over?).to eq(false)
     end
 
-    it "game_status returns :tied when game is tied " do
-      test_board.clear('T')
-      test_board.spaces[4] = 'X'
-      test_board.spaces[0] = 'O'
-      test_board.spaces[8] = 'e'
-      expect(test_rules.game_status).to eq(:tied)
+    it "game_over? returns true if board is full " do
+      test_board.spaces = ['X', 'O', 'X', 'X', 'O', 'X', 'X', 'O', 'X']
+      expect(test_rules.game_over?).to eq(true)
+    end
+
+    it "game_over? returns true if there is a winner " do
+      test_board.spaces = ['X', 'X', 'X', 'O', 'O', ' ', 'O', ' ', ' ']
+      expect(test_rules.game_over?).to eq(true)
     end
   end
 

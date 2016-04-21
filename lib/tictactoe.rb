@@ -18,23 +18,22 @@ class TicTacToe
   end
 
   def game_loop
-    begin
+    until @rules.game_over?
       print_screen
       @players.play_turn(@myBoard)
-    end while @rules.game_status == :playing
+    end
       print_screen
       print_end_of_game
       true
   end
 
   def print_end_of_game
-  outcome = @rules.game_status
-    if outcome == :tied
+    if @rules.tied?
       @myIo.puts_message("The Game Ended in a Tie!\n")
-    elsif outcome != :playing
-      @myIo.puts_message("The Winner is #{outcome}!\n")
+    elsif @rules.winner
+      @myIo.puts_message("The Winner is #{@rules.winner}!\n")
     end
-    outcome != :playing
+    @rules.game_over?
   end
 
   def print_screen

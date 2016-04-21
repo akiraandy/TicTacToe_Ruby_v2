@@ -6,22 +6,23 @@ class GameRules
     @board = game_board
   end
 
-  def game_status
-    return winner if winner
-    return :tied if tied?
-    return :playing
-  end
+#  def game_status
+#    return winner if winner
+#    return :tied if tied?
+#    return :playing
+#  end
 
   def tied?
     @board.full? && !winner
   end
 
+  def game_over?
+    return true if tied? || winner
+    false 
+  end
+
   def winner
     check_win_col || check_win_row || check_win_diagonal
-#    return check_win_col if check_win_col
-#    return check_win_row if check_win_row
-#    return check_win_diagonal if check_win_diagonal
-#    false
   end
 
 private
