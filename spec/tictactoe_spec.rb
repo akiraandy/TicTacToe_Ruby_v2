@@ -17,14 +17,14 @@ describe TicTacToe do
 
   describe "Printing end of game " do
     it "Prints tied game when the game is tied " do
-      ttt.myBoard.spaces = ['X', 'O', "A", "b", "c", "d", "e", "f", "g"]
+      ttt.board.spaces = ['X', 'O', "A", "b", "c", "d", "e", "f", "g"]
       should_return = "The Game Ended in a Tie!\n"
       expect(STDOUT).to receive(:puts).with(should_return)
       expect(ttt.print_end_of_game).to eq(true)
     end
 
     it "Prints 'X' if the winner if 'X' winds " do
-      ttt.myBoard.spaces = ['X', 'X', "X", "b", "c", "d", "e", "f", "g"]
+      ttt.board.spaces = ['X', 'X', "X", "b", "c", "d", "e", "f", "g"]
       should_return = "The Winner is X!\n"
       expect(STDOUT).to receive(:puts).with(should_return)
       expect(ttt.print_end_of_game).to eq(true)

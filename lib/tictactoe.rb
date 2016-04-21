@@ -8,19 +8,19 @@ require 'player_manager'
 
 class TicTacToe
 
-  attr_accessor :myBoard
+  attr_accessor :board
 
   def initialize (player1 = nil, player2 = nil)
-    @myIo = GameIo.new
-    @players = PlayerManager.new(@myIo, player1, player2)
-    @myBoard = GameBoard.new
-    @rules = GameRules.new(@myBoard)
+    @io = GameIo.new
+    @players = PlayerManager.new(@io, player1, player2)
+    @board = GameBoard.new
+    @rules = GameRules.new(@board)
   end
 
   def game_loop
     until @rules.game_over?
       print_screen
-      @players.play_turn(@myBoard)
+      @players.play_turn(@board)
     end
       print_screen
       print_end_of_game
@@ -29,16 +29,16 @@ class TicTacToe
 
   def print_end_of_game
     if @rules.tied?
-      @myIo.puts_message("The Game Ended in a Tie!\n")
+      @io.puts_message("The Game Ended in a Tie!\n")
     elsif @rules.winner
-      @myIo.puts_message("The Winner is #{@rules.winner}!\n")
+      @io.puts_message("The Winner is #{@rules.winner}!\n")
     end
     @rules.game_over?
   end
 
   def print_screen
-    @myIo.clear_screen
-    @myIo.puts_message("\n Tic Tac Toe ")
-    @myIo.print_board(@myBoard.spaces, @myBoard.grid_size)
+    @io.clear_screen
+    @io.puts_message("\n Tic Tac Toe ")
+    @io.print_board(@board.spaces, @board.grid_size)
   end
 end
