@@ -9,8 +9,8 @@ class PlayerManager
       @myIo = game_io
       @player1 = player1
       @player2 = player2
-      @player1 = Player.new(:X, @myIo) if @player1.nil?
-      @player2 = AiBasic.new(:O, @myIo) if @player2.nil?
+      @player1 = PlayerHuman.new(:X, @myIo) if @player1.nil?
+      @player2 = PlayerAiBasic.new(:O, @myIo) if @player2.nil?
       @current_player = @player1
   end
 

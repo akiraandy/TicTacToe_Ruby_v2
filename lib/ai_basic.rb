@@ -1,6 +1,6 @@
 require 'game_rules'
 
-class AiBasic
+class PlayerAiBasic
   attr_reader :mark
 
   def initialize(mark, game_io = nil)

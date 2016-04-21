@@ -5,8 +5,8 @@ require 'ai_basic'
 
 describe PlayerManager do
   let (:game_io) { GameIo.new }
-  let (:p1) { AiBasic.new(:X) }
-  let (:p2) { AiBasic.new(:O) }
+  let (:p1) { PlayerAiBasic.new(:X) }
+  let (:p2) { PlayerAiBasic.new(:O) }
   let (:test_manager_default) { PlayerManager.new(game_io) }
   let (:test_manager) { PlayerManager.new(game_io, p1, p2) }
   let (:test_board) { GameBoard.new }
@@ -21,11 +21,11 @@ describe PlayerManager do
     end
 
     it "player1.type is :Human if no member passed in " do
-      expect(test_manager_default.current_player.class).to eq(Player)
+      expect(test_manager_default.current_player.class).to eq(PlayerHuman)
     end
 
     it "player2.type is :AiBasic if no member passed in " do
-      expect(test_manager_default.non_current_player.class).to eq(AiBasic)
+      expect(test_manager_default.non_current_player.class).to eq(PlayerAiBasic)
     end
 
   end

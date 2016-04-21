@@ -5,8 +5,8 @@ require 'game_io'
 describe TicTacToe do
   let (:ttt) { TicTacToe.new }
   let (:io) { GameIo.new }
-  let (:p1) { AiBasic.new('X', io) }
-  let (:p2) { AiBasic.new('O', io) }
+  let (:p1) { PlayerAiBasic.new('X', io) }
+  let (:p2) { PlayerAiBasic.new('O', io) }
   let (:ttt_2) { TicTacToe.new(p1, p2)}
 
   describe "The Game Loop " do

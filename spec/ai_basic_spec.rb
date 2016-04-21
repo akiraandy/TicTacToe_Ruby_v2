@@ -2,9 +2,9 @@ require 'ai_basic'
 require 'game_board'
 require 'game_state'
 
-describe AiBasic do
+describe PlayerAiBasic do
 
-  let (:test_ai) { AiBasic.new(:O) }
+  let (:test_ai) { PlayerAiBasic.new(:O) }
   let (:test_state) { GameState.new(GameBoard.new , :X, :O) }
   let(:spaces) { test_state.game_board.spaces }
   let(:corners) { [0, 2, 6, 8] }
