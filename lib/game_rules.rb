@@ -7,20 +7,21 @@ class GameRules
   end
 
   def game_status
-    return winner? if winner?
+    return winner if winner
     return :tied if tied?
     return :playing
   end
 
   def tied?
-    @board.full? && !winner?
+    @board.full? && !winner
   end
 
-  def winner?
-    return check_win_col if check_win_col
-    return check_win_row if check_win_row
-    return check_win_diagonal if check_win_diagonal
-    false
+  def winner
+    check_win_col || check_win_row || check_win_diagonal
+#    return check_win_col if check_win_col
+#    return check_win_row if check_win_row
+#    return check_win_diagonal if check_win_diagonal
+#    false
   end
 
 private
