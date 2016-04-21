@@ -1,6 +1,8 @@
 
 class GameIo
 
+  attr_reader :wrapper
+
   def initialize
     @wrapper = WrapperStdio.new
   end
