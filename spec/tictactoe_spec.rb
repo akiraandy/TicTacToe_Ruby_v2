@@ -37,10 +37,14 @@ describe TicTacToe do
 
   describe "Printing the game screeen " do
     it "Should print Tic Tac Toe and a blank board, if no moves have been played " do
-      should_return1 = "\n Tic Tac Toe "
-      should_return2 = "\n---\n---\n---\n"
+      should_return1 = "\n Legend "
+      should_return2 = "\n012\n345\n678\n"
+      should_return3 = "\n Tic Tac Toe "
+      should_return4 = "\n---\n---\n---\n"
       expect(STDOUT).to receive(:puts).with(should_return1)
       expect(STDOUT).to receive(:puts).with(should_return2)
+      expect(STDOUT).to receive(:puts).with(should_return3)
+      expect(STDOUT).to receive(:puts).with(should_return4)
       ttt.print_screen
     end
   end

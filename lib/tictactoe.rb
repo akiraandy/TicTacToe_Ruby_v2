@@ -15,6 +15,8 @@ class TicTacToe
     @players = PlayerManager.new(@io, player1, player2)
     @board = GameBoard.new
     @rules = GameRules.new(@board)
+    @legend = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
+    @legend_size = 3
   end
 
   def game_loop
@@ -38,6 +40,8 @@ class TicTacToe
 
   def print_screen
     @io.clear_screen
+    @io.puts_message("\n Legend ")
+    @io.print_board(@legend, @legend_size)
     @io.puts_message("\n Tic Tac Toe ")
     @io.print_board(@board.spaces, @board.grid_size)
   end
