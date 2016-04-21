@@ -6,11 +6,11 @@ class PlayerManager
   attr_reader :current_player
 
   def initialize(game_io, player1 = nil, player2 = nil)
-      @myIo = game_io
+      @io = game_io
       @player1 = player1
       @player2 = player2
-      @player1 = PlayerHuman.new(:X, @myIo) if @player1.nil?
-      @player2 = PlayerAiBasic.new(:O, @myIo) if @player2.nil?
+      @player1 = PlayerHuman.new(:X, @io) if @player1.nil?
+      @player2 = PlayerAiBasic.new(:O, @io) if @player2.nil?
       @current_player = @player1
   end
 
