@@ -5,7 +5,7 @@ class GameBoard
 
   def initialize(grid_size = 3)
     @grid_size = grid_size
-    clear
+    @spaces = Array.new(@grid_size * @grid_size, ' ')
   end
 
   def deep_copy
@@ -15,11 +15,11 @@ class GameBoard
     end
     temp_board
   end
-
+=begin
   def clear(char = ' ')
     @spaces = Array.new(@grid_size * @grid_size, char)
   end
-
+=end
   def valid_move?(space)
     @spaces[space] == ' '
   end

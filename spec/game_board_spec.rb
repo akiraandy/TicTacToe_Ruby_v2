@@ -6,7 +6,7 @@ describe GameBoard do
   describe "deep copy " do
     it "makes a deep copy " do
       test_board_2 = test_board.deep_copy
-      test_board.clear('t')
+      test_board.spaces[1] = 'X'
       expect(test_board_2.spaces[1]).to eq(' ')
     end
   end
@@ -32,17 +32,13 @@ describe GameBoard do
   end
 
   describe "clearing board, checking full/empty, number of moves free " do
-    it "clears the board " do
-      test_board.clear('T')
-      expect(test_board.spaces).to eq(["T","T","T","T","T","T","T","T","T"])
-    end
 
     it "available_moves returns an array of size 9 when board is empty " do
       expect(test_board.available_moves.size).to eq(9)
     end
 
     it "full? returns true if board is full " do
-      test_board.clear('T')
+      test_board.spaces = ["T","T","T","T","T","T","T","T","T"]
       expect(test_board.full?).to eq(true)
     end
 

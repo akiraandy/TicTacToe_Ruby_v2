@@ -6,7 +6,7 @@ describe GameState do
 
   it "Makes a deep copy of the game_board " do
       test_state = GameState.new(test_board, 'X', 'O')
-      test_board.clear('x')
+      test_board.spaces[0] = 'X'
       expect(test_state.game_board.spaces[0]).to eq(' ')
   end
 

@@ -82,10 +82,7 @@ describe GameRules do
   describe "testing tie? " do
 
     it "tied? returns true if the game is tied " do
-      test_board.clear('T')
-      test_board.spaces[4] = 'X'
-      test_board.spaces[0] = 'O'
-      test_board.spaces[8] = 'e'
+      test_board.spaces = ['O', 'A', 'C', '1', 'D', 'E', '2', 'y', 'g']
       expect(test_rules.tied?).to eq(true)
     end
 
