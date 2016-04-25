@@ -1,10 +1,12 @@
 require 'player_manager'
 require 'game_io'
 require 'game_board'
-require 'ai_basic'
+require 'player_ai_basic'
+require 'player_human'
+
 
 describe PlayerManager do
-  let (:game_io) { GameIo.new }
+  let (:game_io) { "dummy" }
   let (:p1) { PlayerAiBasic.new(:X) }
   let (:p2) { PlayerAiBasic.new(:O) }
   let (:test_manager_default) { PlayerManager.new(game_io) }
