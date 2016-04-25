@@ -15,11 +15,7 @@ class GameBoard
     end
     temp_board
   end
-=begin
-  def clear(char = ' ')
-    @spaces = Array.new(@grid_size * @grid_size, char)
-  end
-=end
+
   def valid_move?(space)
     @spaces[space] == ' '
   end
