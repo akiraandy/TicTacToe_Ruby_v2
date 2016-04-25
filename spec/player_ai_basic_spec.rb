@@ -1,10 +1,11 @@
-require 'ai_basic'
+require 'player_ai_basic'
 require 'game_board'
 require 'game_state'
 
 describe PlayerAiBasic do
-
-  let (:test_ai) { PlayerAiBasic.new(:O) }
+  let (:io) { "dummy" }
+  let (:test_ai) { PlayerAiBasic.new(:O, io )}
+  let (:test_ai2) { PlayerAiBasic.new(:X, io) }
   let (:test_state) { GameState.new(GameBoard.new , :X, :O) }
   let(:spaces) { test_state.game_board.spaces }
   let(:corners) { [0, 2, 6, 8] }
@@ -32,8 +33,7 @@ describe PlayerAiBasic do
     it "plays a radnom move if it can't win, block, or play a corner " do
       spaces[0] = spaces[5] = spaces[6] = spaces[7] = :X
       spaces[2] = spaces[3] = spaces[8] = :O
-      test_state.switch_turns
-      move = test_ai.play_move(test_state)
+      move = test_ai2.play_move(test_state)
       expect(move.class).to eq(Fixnum)
     end
   end
