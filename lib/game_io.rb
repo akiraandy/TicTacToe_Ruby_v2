@@ -1,11 +1,9 @@
-
 class GameIo
 
-  attr_reader :wrapper
-
-  def initialize
-    @wrapper = WrapperStdio.new
+  def initialize(wrapper_io)
+    @wrapper = wrapper_io
   end
+
   def print_board(spaces, grid_size)
     rtn_string = "\n"
     spaces.each.with_index do |val, i|
@@ -16,8 +14,7 @@ class GameIo
       end
       rtn_string << "\n" if ((i + 1) % grid_size == 0)
     end
-    @wrapper.puts_message(rtn_string)
-    rtn_string
+    puts_message(rtn_string)
   end
 
   def clear_screen
@@ -30,19 +27,5 @@ class GameIo
 
   def get_input
     @wrapper.get_input
-  end
-end
-
-class WrapperStdio
-  def clear_screen
-    system("clear")
-  end
-
-  def puts_message(puts_string)
-    puts puts_string
-  end
-
-  def get_input
-    gets.chomp
   end
 end
