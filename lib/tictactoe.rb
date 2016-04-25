@@ -10,7 +10,7 @@ require 'game_loop'
 require 'game_screen'
 class TicTacToe
 
-  attr_accessor :board
+  attr_accessor :board, :game_loop
 
   def initialize (game_io, player1, player2)
 
