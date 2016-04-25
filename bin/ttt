@@ -3,5 +3,16 @@ lib = File.expand_path("../../lib", __FILE__)
 $:.unshift(lib)
 
 require 'tictactoe'
-myGame = TicTacToe.new
-myGame.game_loop
+require 'game_io'
+require 'wrapper_stdio'
+require 'player_human'
+require 'player_ai_basic'
+
+io = GameIo.new(WrapperStdio.new)
+p1 = PlayerHuman.new('X', io)
+p2 = PlayerAiBasic.new('O', io)
+
+
+
+myGame = TicTacToe.new(io, p1, p2)
+myGame.play_game
