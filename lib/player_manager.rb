@@ -1,6 +1,7 @@
-require 'player'
+require 'player_human'
 require 'game_state'
-require 'ai_basic'
+require 'player_ai_basic'
+
 class PlayerManager
 
   attr_reader :current_player
@@ -9,8 +10,8 @@ class PlayerManager
       @io = game_io
       @player1 = player1
       @player2 = player2
-      @player1 = PlayerHuman.new(:X, @io) if @player1.nil?
-      @player2 = PlayerAiBasic.new(:O, @io) if @player2.nil?
+      @player1 ||= PlayerHuman.new(:X, @io)
+      @player2 ||= PlayerAiBasic.new(:O, @io)
       @current_player = @player1
   end
 
