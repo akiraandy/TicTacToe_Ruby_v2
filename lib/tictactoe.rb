@@ -17,7 +17,7 @@ class TicTacToe
     @io = game_io
     @players = PlayerManager.new(@io, player1, player2)
     @board = GameBoard.new
-    @rules = GameRules.new(@board)
+    @rules = GameRules.new
     @legend = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
     @legend_size = 3
     @game_screen = GameScreen.new(@io, @board, @players, @rules, @legend, @legend_size)
