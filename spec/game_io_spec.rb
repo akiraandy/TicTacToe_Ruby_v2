@@ -3,7 +3,7 @@ require 'game_board'
 
 describe GameIo do
   let (:test_board) { GameBoard.new(3) }
-  let (:test_wrapper) { "dummy" }
+  let (:test_wrapper) { double }
   let (:test_io) { GameIo.new(test_wrapper) }
 
   describe "printing a board " do
