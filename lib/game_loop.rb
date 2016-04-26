@@ -1,5 +1,6 @@
 class GameLoop
-
+  attr_accessor :board
+ 
   def initialize(board, game_screen, rules, players)
     @board = board
     @players = players

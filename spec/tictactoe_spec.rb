@@ -12,17 +12,18 @@ describe TicTacToe do
     test_ttt.play_game
   end
 
-  describe "the play_again? method " do
-    it "returns true if user says yes " do
-      allow(game_io).to receive(:puts_message)
-      allow(game_io).to receive(:get_input).and_return("Y")
-      expect(test_ttt.play_again?).to eq(true)
-    end
+  it "plays the game twice " do
+    expect(test_ttt.game_loop).to receive(:game_loop).twice
+    allow(test_ttt).to receive(:new_game)
+    expect(test_ttt).to receive(:play_again?).and_return(true, false)
+    test_ttt.play_game
+  end
 
-    it "returns false if user says no " do
-      allow(game_io).to receive(:puts_message)
-      allow(game_io).to receive(:get_input).and_return("N")
-      expect(test_ttt.play_again?).to eq(false)
-    end
+  it "gameboad is blank after new_game " do
+    expect(test_ttt.game_loop).to receive(:game_loop).twice
+    expect(test_ttt).to receive(:play_again?).and_return(true, false)
+    test_ttt.board.spaces[0] = 'X'
+    test_ttt.play_game
+    expect(test_ttt.board.spaces[0]).to eq(' ')
   end
 end
