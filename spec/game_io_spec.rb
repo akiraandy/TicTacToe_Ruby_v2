@@ -26,7 +26,7 @@ describe GameIo do
 
   describe "testing puts and print " do
     it "STDOUT should recieve :puts with 'test' " do
-      allow(test_wrapper).to receive(:puts_message) { 'test' }
+      expect(test_wrapper).to receive(:puts_message) { 'test' }
       test_io.puts_message('test')
     end
   end
