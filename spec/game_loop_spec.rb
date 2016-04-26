@@ -13,7 +13,7 @@ describe GameLoop do
   describe "The game_loop " do
     it "calls @screen.print_end_of_game if @rules.game_over? == true " do
       allow(rules).to receive(:game_over?) { true }
-      allow(game_screen).to receive(:print_screen) { }
+      allow(game_screen).to receive(:print_screen) 
       expect(game_screen).to receive(:print_end_of_game)
       expect(players).to receive(:play_turn)
       test_loop.game_loop
@@ -21,7 +21,7 @@ describe GameLoop do
 
     it "doesn't print end of screen if @rules.game_over? == false " do
       allow(rules).to receive(:game_over?).and_return(false, true)
-      allow(game_screen).to receive(:print_screen) { }
+      allow(game_screen).to receive(:print_screen)
       expect(players).to receive(:play_turn)
       expect(players).to receive(:play_turn)
       expect(game_screen).to receive(:print_end_of_game)
