@@ -11,10 +11,10 @@ class GameScreen
 
 
   def print_end_of_game
-    if @rules.tied?
+    if @rules.tied?(@board)
       @io.puts_message("The Game Ended in a Tie!\n")
-    elsif @rules.winner
-      @io.puts_message("The Winner is #{@rules.winner}!\n")
+    elsif @rules.winner(@board)
+      @io.puts_message("The Winner is #{@rules.winner(@board)}!\n")
     end
   end
 

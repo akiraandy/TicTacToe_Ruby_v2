@@ -12,8 +12,8 @@ describe GameScreen do
   let (:board) { GameBoard.new }
   let (:p1) { PlayerAiBasic.new('X', io) }
   let (:p2) { PlayerAiBasic.new('O', io) }
-  let (:players1) { PlayerManager.new(p1, p2) }
-  let (:rules) { GameRules.new (board) }
+  let (:players1) { PlayerManager.new(io, p1, p2) }
+  let (:rules) { GameRules.new  }
   let (:legend) { ['0', '1', '2', '3', '4', '5', '6', '7', '8'] }
   let (:legend_size)  { 3 }
 
