@@ -1,12 +1,16 @@
 require 'player_ai_basic'
 require 'game_board'
 require 'game_state'
+require 'game_rules'
 
 describe PlayerAiBasic do
   let (:io) { "dummy" }
-  let (:test_ai) { PlayerAiBasic.new(:O, io )}
-  let (:test_ai2) { PlayerAiBasic.new(:X, io) }
-  let (:test_state) { GameState.new(GameBoard.new , :X, :O) }
+  let (:board) { GameBoard.new }
+  let (:rules) { GameRules.new }
+
+  let (:test_ai) { PlayerAiBasic.new(:O, rules) }
+  let (:test_ai2) { PlayerAiBasic.new(:X, rules) }
+  let (:test_state) { GameState.new(board , :X, :O) }
   let(:spaces) { test_state.game_board.spaces }
   let(:corners) { [0, 2, 6, 8] }
 
