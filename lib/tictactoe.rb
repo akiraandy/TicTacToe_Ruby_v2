@@ -20,6 +20,16 @@ class TicTacToe
   end
 
   def play_game
+    begin
     @game_loop.game_loop
+    @board.new_game
+    end while (play_again?)
+  end
+
+  def play_again?
+    @io.puts_message("Play again (Y/N) : ")
+    input = @io.get_input
+    return true if (input == "y" || input == "Y")
+    false
   end
 end
