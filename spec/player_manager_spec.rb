@@ -3,37 +3,17 @@ require 'game_io'
 require 'game_board'
 require 'player_ai_basic'
 require 'player_human'
-
+require 'game_rules'
 
 describe PlayerManager do
-  let (:game_io) { "dummy" }
-  let (:p1) { PlayerAiBasic.new(:X) }
-  let (:p2) { PlayerAiBasic.new(:O) }
-  let (:test_manager_default) { PlayerManager.new(game_io) }
+  let (:game_io) { double }
+  let (:p1) { PlayerAiBasic.new(:X, GameRules.new) }
+  let (:p2) { PlayerAiBasic.new(:O, GameRules.new) }
+#  let (:test_manager_default) { PlayerManager.new(game_io, ) }
   let (:test_manager) { PlayerManager.new(game_io, p1, p2) }
   let (:test_board) { GameBoard.new }
 
-  describe "initialize method " do
-    it "player1.mark is :X if no member passed in " do
-      expect(test_manager_default.current_player.mark).to eq(:X)
-    end
-
-    it "player2.mark is :O if no member passed in " do
-      expect(test_manager_default.non_current_player.mark).to eq(:O)
-    end
-
-    it "player1.type is :Human if no member passed in " do
-      expect(test_manager_default.current_player.class).to eq(PlayerHuman)
-    end
-
-    it "player2.type is :AiBasic if no member passed in " do
-      expect(test_manager_default.non_current_player.class).to eq(PlayerAiBasic)
-    end
-
-  end
-
   describe "Players " do
-
     describe "switch_turns " do
       it "switch_turns swaps the current_player and non_current_player " do
         p1 = test_manager.current_player

@@ -1,17 +1,14 @@
 require 'player_human'
 require 'game_state'
 require 'player_ai_basic'
-
+require 'game_rules'
 class PlayerManager
 
   attr_reader :current_player
 
-  def initialize(game_io, player1 = nil, player2 = nil)
-      @io = game_io
+  def initialize(game_io, player1, player2)
       @player1 = player1
       @player2 = player2
-      @player1 ||= PlayerHuman.new(:X, @io)
-      @player2 ||= PlayerAiBasic.new(:O, @io)
       @current_player = @player1
   end
 
