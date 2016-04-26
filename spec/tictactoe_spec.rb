@@ -8,14 +8,16 @@ describe TicTacToe do
 
   it "runs the game loop " do
     expect(test_ttt.game_loop).to receive(:game_loop).once
-    expect(test_ttt).to receive(:play_again?).and_return(false)
+    expect(game_io).to receive(:puts_message)
+    expect(game_io).to receive(:get_input).and_return("N")
     test_ttt.play_game
   end
 
   it "plays the game twice " do
     expect(test_ttt.game_loop).to receive(:game_loop).twice
     allow(test_ttt).to receive(:new_game)
-    expect(test_ttt).to receive(:play_again?).and_return(true, false)
+    expect(game_io).to receive(:puts_message).twice
+    expect(game_io).to receive(:get_input).and_return("Y", "N")
     test_ttt.play_game
   end
 

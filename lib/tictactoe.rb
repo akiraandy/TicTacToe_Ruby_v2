@@ -23,7 +23,7 @@ class TicTacToe
     begin
     @game_loop.game_loop
     new_game
-    end while (play_again?)
+    end while play_again?
   end
 
   private
