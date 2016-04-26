@@ -11,14 +11,6 @@ describe GameBoard do
     end
   end
 
-  describe "New game " do
-    it "clears the board after new_game is called " do
-      test_board.spaces[1] = 'X'
-      test_board.new_game
-      expect(test_board.spaces[1]).to eq(' ')
-    end
-  end
-
   describe "playing spaces " do
     it "Has 9 spaces for a 3x3 board " do
       expect(test_board.size).to eq(9)

@@ -5,7 +5,7 @@ class GameBoard
 
   def initialize(grid_size = 3)
     @grid_size = grid_size
-    new_game
+    @spaces = Array.new(@grid_size * @grid_size, ' ')
   end
 
   def deep_copy
@@ -14,10 +14,6 @@ class GameBoard
       temp_board.spaces[i] = val
     end
     temp_board
-  end
-
-  def new_game
-    @spaces = Array.new(@grid_size * @grid_size, ' ')
   end
 
   def valid_move?(space)
