@@ -11,7 +11,7 @@ class GameLoop
     begin
       @screen.print_screen
       @players.play_turn(@board)
-    end until @rules.game_over?
+    end until @rules.game_over?(@board)
       @screen.print_screen
       @screen.print_end_of_game
   end
