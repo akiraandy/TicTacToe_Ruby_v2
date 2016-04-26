@@ -2,20 +2,19 @@ require 'game_board'
 
 class GameRules
 
-  def initialize (game_board)
-    @board = game_board
+
+  def tied?(board)
+    board.full? && !winner(board)
   end
 
-  def tied?
-    @board.full? && !winner
+  def game_over?(board)
+    return true if (tied?(board) || winner(board))
+    false
+
   end
 
-  def game_over?
-    return true if tied? || winner
-    false 
-  end
-
-  def winner
+  def winner(board)
+    @board = board
     check_win_col || check_win_row || check_win_diagonal
   end
 
