@@ -7,10 +7,12 @@ require 'game_io'
 require 'wrapper_stdio'
 require 'player_human'
 require 'player_ai_basic'
+require 'game_rules'
 
 io = GameIo.new(WrapperStdio.new)
+
 p1 = PlayerHuman.new('X', io)
-p2 = PlayerAiBasic.new('O', io)
+p2 = PlayerAiBasic.new('O', GameRules.new)
 
 
 
