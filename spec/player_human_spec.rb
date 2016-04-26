@@ -3,8 +3,6 @@ require 'game_board'
 require 'game_state'
 require 'game_io'
 
-
-
 describe PlayerHuman do
   let(:game_io) { "dummy" }
   let(:test_player) { PlayerHuman.new(:X, game_io) }
@@ -84,5 +82,13 @@ describe PlayerHuman do
       expect(test_player.play_move(state)).to eq(8)
     end
 
+    it "rejects 5 and takes second input of 1 when that is a valid move " do
+      board.spaces[5] = 'X'
+      state = GameState.new(board, test_player, test_player2)
+      allow(game_io).to receive(:get_input).and_return(5, 1)
+      expect(game_io).to receive(:puts_message).once.with("Please input a move: ")
+      expect(game_io).to receive(:puts_message).twice.with("That is not a valid move, please try again : ")
+      expect(test_player.play_move(state)).to eq(1)
+    end 
   end
 end
