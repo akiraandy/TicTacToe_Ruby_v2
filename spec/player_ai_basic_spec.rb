@@ -4,7 +4,7 @@ require 'game_state'
 require 'game_rules'
 
 describe PlayerAiBasic do
-  let (:io) { "dummy" }
+  let (:io) { double }
   let (:board) { GameBoard.new }
   let (:rules) { GameRules.new }
 
