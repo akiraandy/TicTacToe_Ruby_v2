@@ -2,7 +2,6 @@ require 'game_board'
 
 class GameRules
 
-
   def tied?(board)
     board.full? && !winner(board)
   end
@@ -10,7 +9,6 @@ class GameRules
   def game_over?(board)
     return true if (tied?(board) || winner(board))
     false
-
   end
 
   def winner(board)

@@ -1,5 +1,6 @@
 class PlayerHuman
   attr_reader :mark 
+  
   def initialize(mark, game_io)
     @mark = mark
     @io = game_io

@@ -1,5 +1,6 @@
 class GameState
   attr_accessor :game_board, :player, :opponent
+  
   def initialize(game_board, player_mark, opponent_mark)
     @game_board = game_board.deep_copy
     @player = player_mark

@@ -9,7 +9,6 @@ class GameScreen
     @legend_size = legend_size
   end
 
-
   def print_end_of_game
     if @rules.tied?(@board)
       @io.puts_message("The Game Ended in a Tie!\n")

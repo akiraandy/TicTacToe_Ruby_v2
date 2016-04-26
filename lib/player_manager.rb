@@ -1,7 +1,4 @@
-require 'player_human'
 require 'game_state'
-require 'player_ai_basic'
-require 'game_rules'
 class PlayerManager
 
   attr_reader :current_player

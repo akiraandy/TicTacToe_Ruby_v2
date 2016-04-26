@@ -1,5 +1,3 @@
-require 'game_rules'
-
 class PlayerAiBasic
   attr_reader :mark
 

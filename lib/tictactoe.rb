@@ -1,11 +1,6 @@
-require 'game_io'
 require 'game_board'
-require 'player_ai_basic'
-require 'game_state'
 require 'game_rules'
-require 'player_human'
 require 'player_manager'
-require 'wrapper_stdio'
 require 'game_loop'
 require 'game_screen'
 class TicTacToe
@@ -27,5 +22,4 @@ class TicTacToe
   def play_game
     @game_loop.game_loop
   end
-
 end
