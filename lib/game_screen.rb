@@ -1,5 +1,7 @@
 class GameScreen
 
+  attr_accessor :board
+  
   def initialize(io, board, players, rules, legend, legend_size)
     @io = io
     @board = board
