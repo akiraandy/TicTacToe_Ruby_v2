@@ -6,7 +6,7 @@ describe TicTacToe do
   let (:player2) { double }
   let (:test_ttt) { TicTacToe.new(game_io, player1, player2) }
 
-  it "runs the game loop " do
+  it "runs the main loop " do
     expect(test_ttt.game_loop).to receive(:game_loop).once
     expect(game_io).to receive(:puts_message)
     expect(game_io).to receive(:get_input).and_return("N")
