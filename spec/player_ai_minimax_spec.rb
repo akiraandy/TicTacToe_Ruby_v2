@@ -3,23 +3,19 @@ require 'game_board'
 require 'game_state'
 require 'game_rules'
 
-
 describe PlayerAiMinimax do
   let (:io) { double }
   let (:board) { GameBoard.new }
   let (:rules) { GameRules.new }
-
   let (:test_ai) { PlayerAiMinimax.new(:X, rules) }
   let (:test_ai2) { PlayerAiMinimax.new(:O, rules) }
   let (:test_state) { GameState.new(board , :X, :O) }
   let(:spaces) { test_state.game_board.spaces }
   let(:corners) { [0, 2, 6, 8] }
 
-
   describe "It has a mark " do
     it ".mark returns :X " do
       expect(test_ai.mark).to eq(:X)
-
     end
   end
   
