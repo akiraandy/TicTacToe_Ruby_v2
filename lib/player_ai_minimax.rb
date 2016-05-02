@@ -4,12 +4,14 @@ class PlayerAiMinimax
   def initialize(mark, rules)
     @mark = mark
     @rules = rules
+    @corners = [0,2,6,8]
   end
 
   def play_move(game_state)
     board = game_state.game_board
     return 0 if board.empty?
     return 4 if opponent_played_corner_for_first_move(board)
+    return corner_move(board) if board.available_moves.size == 8
     @current_player = game_state.player
     @non_current_player = game_state.opponent
     minimax(board, game_state.player, game_state.opponent)
@@ -17,14 +19,15 @@ class PlayerAiMinimax
   end
 
   private
+
+  def corner_move(board)
+    available_corners = @corners & board.available_moves
+    i = Random.rand(available_corners.size)
+    available_corners[i]
+  end
+
   def opponent_played_corner_for_first_move(board)
-    corners = [0,2,6,8]
-    if (board.available_moves.size == 8)
-      corners.each do |i|
-        return true if board.spaces[i] != ' '
-      end
-    end
-    false
+    @corners.any? { |corner| board.spaces[corner] != ' '} if (board.available_moves.size == 8)
   end
   
   def score(board)
