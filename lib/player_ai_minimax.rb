@@ -12,10 +12,12 @@ class PlayerAiMinimax
     @current_player = game_state.player
     @non_current_player = game_state.opponent
     board = game_state.game_board
-    move ||= first_turn(board) if first_move?(board)
-    move ||= second_turn(board) if second_move?(board)
+    if first_move?(board)
+      move = first_turn(board)
+    elsif second_move?(board)
+      move = second_turn(board)
+    end
     move ||= best_move(board, game_state.player, game_state.opponent)
-    move
   end
 
   private
@@ -31,35 +33,33 @@ class PlayerAiMinimax
   end
 
   def first_turn(board)
-    move ||= corner_move(board) if board.empty?
-    move ||= 4 if opponent_played_corner_for_first_move(board)
-    move ||= corner_move(board) if board.available_moves.size == 8
+    move = (opponent_played_corner_for_first_move(board)) ? 4 : corner_move(board)
     move
   end
 
   def second_turn(board)
-    if board.available_moves.size == 7
-      move ||= opponent_played_opposite_side_for_turn2(board)
+      move = opponent_played_opposite_side_for_turn2(board)
       CORNERS.each.with_index do |val, i|
         move ||= OPPOSITE_CORNERS[i] if (board.spaces[val] == @mark && \
                                          board.spaces[OPPOSITE_CORNERS[i]] == ' ')
-      end
     end
     move
   end
 
   def opponent_played_opposite_side_for_turn2(board)
-    move ||= 2 if (board.spaces[0] == @current_player && \
-                   (board.spaces[5] == @non_current_player || board.spaces[7] == @non_current_player))
-
-    move ||= 0 if (board.spaces[2] == @current_player && \
-                   (board.spaces[3] == @non_current_player || board.spaces[7] == @non_current_player))
-
-    move ||= 8 if (board.spaces[6] == @current_player && \
-                   (board.spaces[1] == @non_current_player || board.spaces[5] == @non_current_player))
-
-    move ||= 6 if (board.spaces[8] == @current_player && \
-                   (board.spaces[1] == @non_current_player || board.spaces[3] == @non_current_player))
+    if (board.spaces[0] == @current_player && \
+        (board.spaces[5] == @non_current_player || board.spaces[7] == @non_current_player))
+      move = 2
+    elsif (board.spaces[2] == @current_player && \
+           (board.spaces[3] == @non_current_player || board.spaces[7] == @non_current_player))
+      move = 0
+    elsif (board.spaces[6] == @current_player && \
+           (board.spaces[1] == @non_current_player || board.spaces[5] == @non_current_player))
+      move = 8
+    elsif (board.spaces[8] == @current_player && \
+           (board.spaces[1] == @non_current_player || board.spaces[3] == @non_current_player))
+      move = 6
+    end
     move
   end
 
@@ -98,18 +98,20 @@ class PlayerAiMinimax
   end
 
   def best_score(scores, player)
-    if player == @current_player
-      max_score_index = scores.each_with_index.max[1]
-      return scores[max_score_index]
-    else
-      min_score_index = scores.each_with_index.min[1]
-      return scores[min_score_index]
-    end
+    score_index = (player == @current_player) ? \
+      scores.each_with_index.max[1] : scores.each_with_index.min[1]
+    scores[score_index]
   end
 
   def score(board, depth)
-    return 10 - depth if rules.winner(board) == @current_player
-    return depth - 10  if rules.winner(board) == @non_current_player
-    return 0 - depth
+    case rules.winner(board)
+    when @current_player
+      score = 10 - depth
+    when @non_current_player
+      score = depth - 10
+    else
+      score = 0 - depth
+    end
+    score
   end
 end
