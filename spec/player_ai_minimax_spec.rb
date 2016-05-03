@@ -202,7 +202,8 @@ describe PlayerAiMinimax do
       it "returns adjacent corner when player 2 plays opposite corner " do
         set_spaces(:X, [0])
         set_spaces(:O, [8])
-        expect(test_ai.play_move(test_state)).to eq(6)
+        move = test_ai.play_move(test_state)
+        expect([2,6].include?(move)).to eq(true)
       end
 
       it "returns adjacent corner when player 2 plays opposite side " do

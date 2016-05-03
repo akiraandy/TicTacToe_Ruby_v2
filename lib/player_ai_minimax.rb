@@ -16,8 +16,10 @@ class PlayerAiMinimax
       move = first_turn(board)
     elsif second_move?(board)
       move = second_turn(board)
-    end
-    move ||= best_move(board, game_state.player, game_state.opponent)
+    else
+    move = best_move(board, game_state.player, game_state.opponent)
+  end
+    move
   end
 
   private
@@ -42,7 +44,7 @@ class PlayerAiMinimax
         move ||= OPPOSITE_CORNERS[i] if (board.spaces[val] == @mark && \
                                          board.spaces[OPPOSITE_CORNERS[i]] == ' ')
     end
-    move
+    move ||= corner_move(board)
   end
 
   def opponent_played_opposite_side_for_turn2(board)
