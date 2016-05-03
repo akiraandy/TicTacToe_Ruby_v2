@@ -16,7 +16,6 @@ class PlayerAiMinimax
     move ||= first_turn(board)
     move ||= best_move(board, game_state.player, game_state.opponent)
     move
-
   end
 
   private
@@ -48,7 +47,6 @@ class PlayerAiMinimax
       temp_board.spaces[move] = player
       scores[i] = minimax(temp_board, opponent, player, 0)
     end
-
     max_score_index = scores.each_with_index.max[1]
     moves[max_score_index]
   end
