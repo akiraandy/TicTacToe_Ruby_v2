@@ -125,109 +125,12 @@ describe PlayerAiMinimax do
   end
 
   describe "Turn 3 " do
-    describe "if opponent plays center it returns opposite corner of its first move " do
-      it "returns 8 if first move was 0 " do
-        set_spaces(:X, [0])
-        set_spaces(:O, [4])
-        expect(test_ai.play_move(test_state)).to eq(8)
-      end
-      it "returns 0 if first move was 8 " do
-        set_spaces(:X, [8])
-        set_spaces(:O, [4])
-        expect(test_ai.play_move(test_state)).to eq(0)
-      end
-      it "returns 2 if first move was 6 " do
-        set_spaces(:X, [2])
-        set_spaces(:O, [4])
-        expect(test_ai.play_move(test_state)).to eq(6)
-      end
-      it "returns 6 if first move was 2 " do
-        set_spaces(:X, [6])
-        set_spaces(:O, [4])
-        expect(test_ai.play_move(test_state)).to eq(2)
-      end
-    end
-    describe "if opponent plays ajaacent corner ai plays opposite corner of its first move " do
-      it "returns 0 " do
-        set_spaces(:X, [8])
-        set_spaces(:O, [2])
-        expect(test_ai.play_move(test_state)).to eq(0)
-      end
-
-      it "returns 0 " do
-        set_spaces(:X, [8])
-        set_spaces(:O, [6])
-        expect(test_ai.play_move(test_state)).to eq(0)
-      end
-
-      it "returns 2 " do
-        set_spaces(:X, [6])
-        set_spaces(:O, [0])
-        expect(test_ai.play_move(test_state)).to eq(2)
-      end
-
-      it "returns 2 " do
-        set_spaces(:X, [6])
-        set_spaces(:O, [8])
-        expect(test_ai.play_move(test_state)).to eq(2)
-      end
-
-      it "returns 6 " do
-        set_spaces(:X, [2])
-        set_spaces(:O, [0])
-        expect(test_ai.play_move(test_state)).to eq(6)
-      end
-
-      it "returns 6 " do
-        set_spaces(:X, [2])
-        set_spaces(:O, [8])
-        expect(test_ai.play_move(test_state)).to eq(6)
-      end
-
-      it "returns 8 " do
-        set_spaces(:X, [0])
-        set_spaces(:O, [2])
-        expect(test_ai.play_move(test_state)).to eq(8)
-      end
-
-      it "returns 8 " do
-        set_spaces(:X, [0])
-        set_spaces(:O, [6])
-        expect(test_ai.play_move(test_state)).to eq(8)
-      end
-
-    end
-
-    describe "opposite corner is unavailable or won't lead to a fork " do
+   describe "opposite corner is unavailable or won't lead to a fork " do
       it "returns adjacent corner when player 2 plays opposite corner " do
         set_spaces(:X, [0])
         set_spaces(:O, [8])
         move = test_ai.play_move(test_state)
         expect([2,6].include?(move)).to eq(true)
-      end
-
-      it "returns adjacent corner when player 2 plays opposite side " do
-        set_spaces(:X, [0])
-        set_spaces(:O, [5])
-        expect(test_ai.play_move(test_state)).to eq(2)
-      end
-
-      it "returns adjacent corner when player 2 plays opposite side " do
-        set_spaces(:X, [0])
-        set_spaces(:O, [7])
-        expect(test_ai.play_move(test_state)).to eq(2)
-      end
-
-      it "returns adjacent corner when player 2 plays opposite side " do
-        set_spaces(:X, [2])
-        set_spaces(:O, [3])
-        expect(test_ai.play_move(test_state)).to eq(0)
-      end
-
-      it "returns adjacent corner when player 2 plays opposite side " do
-        set_spaces(:X, [2])
-        set_spaces(:O, [7])
-        expect(test_ai.play_move(test_state)).to eq(0)
       end
 
       it "returns adjacent corner when player 2 plays opposite side " do

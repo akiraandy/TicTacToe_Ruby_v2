@@ -14,11 +14,9 @@ class PlayerAiMinimax
     board = game_state.game_board
     if first_move?(board)
       move = first_turn(board)
-    elsif second_move?(board)
-      move = second_turn(board)
     else
-    move = best_move(board, game_state.player, game_state.opponent)
-  end
+      move = best_move(board, game_state.player, game_state.opponent)
+    end
     move
   end
 
@@ -30,38 +28,8 @@ class PlayerAiMinimax
     board.available_moves.size > 7
   end
 
-  def second_move?(board)
-    board.available_moves.size == 7
-  end
-
   def first_turn(board)
     (opponent_played_corner_for_first_move(board)) ? 4 : corner_move(board)
-  end
-
-  def second_turn(board)
-      move = opponent_played_opposite_side_for_turn2(board)
-      CORNERS.each.with_index do |val, i|
-        move ||= OPPOSITE_CORNERS[i] if (board.spaces[val] == @mark && \
-                                         board.spaces[OPPOSITE_CORNERS[i]] == ' ')
-    end
-    move ||= corner_move(board)
-  end
-
-  def opponent_played_opposite_side_for_turn2(board)
-    if (board.spaces[0] == @current_player && \
-        (board.spaces[5] == @non_current_player || board.spaces[7] == @non_current_player))
-      move = 2
-    elsif (board.spaces[2] == @current_player && \
-           (board.spaces[3] == @non_current_player || board.spaces[7] == @non_current_player))
-      move = 0
-    elsif (board.spaces[6] == @current_player && \
-           (board.spaces[1] == @non_current_player || board.spaces[5] == @non_current_player))
-      move = 8
-    elsif (board.spaces[8] == @current_player && \
-           (board.spaces[1] == @non_current_player || board.spaces[3] == @non_current_player))
-      move = 6
-    end
-    move
   end
 
   def corner_move(board)
