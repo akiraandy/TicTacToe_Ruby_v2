@@ -43,15 +43,15 @@ describe PlayerAiMinimax do
       expect(test_ai.play_move(test_state)).to eq(7)
     end
 
-    it "when only 6 and 7 are left it plays 7 and neither move wins / blocks " do
-      set_spaces(:X, [1,2,3,8])
-      set_spaces(:O, [0,4,5])
-      expect(test_ai.play_move(test_state)).to eq(7)
+    it "it plays to win if one of the moves wins and the other blocks" do
+      set_spaces(:X, [2,5,7])
+      set_spaces(:O, [1,3,4,6])
+      expect(test_ai.play_move(test_state)).to eq(8)
     end
 
-    it "when only 1 and 2 are left it plays 2 and neither move wins / blocks " do
-      set_spaces(:X, [0,4,5,6])
-      set_spaces(:O, [3,7,8])
+    it "it plays to win if the other move doesn't win or block " do
+      set_spaces(:X, [4,6,8])
+      set_spaces(:O, [0,3,5,7])
       expect(test_ai.play_move(test_state)).to eq(2)
     end
   end

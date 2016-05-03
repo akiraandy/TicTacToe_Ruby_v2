@@ -1,5 +1,5 @@
 class PlayerAiMinimax
-   attr_reader :mark
+  attr_reader :mark
 
   CORNERS = [0,2,6,8]
 
@@ -63,7 +63,10 @@ class PlayerAiMinimax
       scores.push minimax(possible_game_board, opponent, player, depth + 1)
       moves.push move
     end
+    best_score(scores, player)
+  end
 
+  def best_score(scores, player)
     if player == @current_player
       max_score_index = scores.each_with_index.max[1]
       return scores[max_score_index]
