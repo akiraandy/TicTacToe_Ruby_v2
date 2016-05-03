@@ -13,11 +13,10 @@ class PlayerAiMinimax
     @non_current_player = game_state.opponent
     board = game_state.game_board
     if first_move?(board)
-      move = first_turn(board)
+      first_turn(board)
     else
-      move = best_move(board, game_state.player, game_state.opponent)
+      best_move(board, game_state.player, game_state.opponent)
     end
-    move
   end
 
   private
@@ -29,7 +28,7 @@ class PlayerAiMinimax
   end
 
   def first_turn(board)
-    (opponent_played_corner_for_first_move(board)) ? 4 : corner_move(board)
+    opponent_played_corner_for_first_move?(board) ? 4 : corner_move(board)
   end
 
   def corner_move(board)
@@ -37,7 +36,7 @@ class PlayerAiMinimax
     available_corners.sample
   end
 
-  def opponent_played_corner_for_first_move(board)
+  def opponent_played_corner_for_first_move?(board)
     CORNERS.any? { |corner| board.spaces[corner] != ' '} if (board.available_moves.size == 8)
   end
 
@@ -67,20 +66,19 @@ class PlayerAiMinimax
   end
 
   def best_score(scores, player)
-    score_index = (player == @current_player) ? \
-      scores.each_with_index.max[1] : scores.each_with_index.min[1]
+    min_or_max = (player == @current_player) ? :max : :min
+    score_index = scores.each_with_index.send(min_or_max)[1]
     scores[score_index]
   end
 
   def score(board, depth)
     case rules.winner(board)
     when @current_player
-      score = 10 - depth
+      10 - depth
     when @non_current_player
-      score = depth - 10
+      depth - 10
     else
-      score = 0 - depth
+      0 - depth
     end
-    score
   end
 end
