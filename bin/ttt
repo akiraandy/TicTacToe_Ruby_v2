@@ -7,14 +7,15 @@ require 'game_io'
 require 'wrapper_stdio'
 require 'player_human'
 require 'player_ai_basic'
+require 'player_ai_minimax'
 require 'game_rules'
 
 io = GameIo.new(WrapperStdio.new)
 
 p1 = PlayerHuman.new('X', io)
-p2 = PlayerAiBasic.new('O', GameRules.new)
+
+p2 = PlayerAiMinimax.new('O', GameRules.new)
 
 
-
-myGame = TicTacToe.new(io, p1, p2)
+myGame = TicTacToe.new(io, p2, p1)
 myGame.play_game
