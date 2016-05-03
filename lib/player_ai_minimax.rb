@@ -33,8 +33,7 @@ class PlayerAiMinimax
   end
 
   def first_turn(board)
-    move = (opponent_played_corner_for_first_move(board)) ? 4 : corner_move(board)
-    move
+    (opponent_played_corner_for_first_move(board)) ? 4 : corner_move(board)
   end
 
   def second_turn(board)
