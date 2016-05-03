@@ -2,7 +2,7 @@ class PlayerAiMinimax
   attr_reader :mark
 
   CORNERS = [0,2,6,8]
-
+  OPPOSITE_CORNERS = [8,6,2,0]
   def initialize(player_mark, board_rules)
     @mark = player_mark
     @rules = board_rules
@@ -12,8 +12,8 @@ class PlayerAiMinimax
     @current_player = game_state.player
     @non_current_player = game_state.opponent
     board = game_state.game_board
-    move = nil
-    move ||= first_turn(board)
+    move ||= first_turn(board) if first_move?(board)
+    move ||= second_turn(board) if second_move?(board)
     move ||= best_move(board, game_state.player, game_state.opponent)
     move
   end
@@ -22,11 +22,44 @@ class PlayerAiMinimax
 
   attr_reader :rules
 
+  def first_move?(board)
+    board.available_moves.size > 7
+  end
+
+  def second_move?(board)
+    board.available_moves.size == 7
+  end
+
   def first_turn(board)
-    move = nil
     move ||= corner_move(board) if board.empty?
     move ||= 4 if opponent_played_corner_for_first_move(board)
     move ||= corner_move(board) if board.available_moves.size == 8
+    move
+  end
+
+  def second_turn(board)
+    if board.available_moves.size == 7
+      move ||= opponent_played_opposite_side_for_turn2(board)
+      CORNERS.each.with_index do |val, i|
+        move ||= OPPOSITE_CORNERS[i] if (board.spaces[val] == @mark && \
+                                         board.spaces[OPPOSITE_CORNERS[i]] == ' ')
+      end
+    end
+    move
+  end
+
+  def opponent_played_opposite_side_for_turn2(board)
+    move ||= 2 if (board.spaces[0] == @current_player && \
+                   (board.spaces[5] == @non_current_player || board.spaces[7] == @non_current_player))
+
+    move ||= 0 if (board.spaces[2] == @current_player && \
+                   (board.spaces[3] == @non_current_player || board.spaces[7] == @non_current_player))
+
+    move ||= 8 if (board.spaces[6] == @current_player && \
+                   (board.spaces[1] == @non_current_player || board.spaces[5] == @non_current_player))
+
+    move ||= 6 if (board.spaces[8] == @current_player && \
+                   (board.spaces[1] == @non_current_player || board.spaces[3] == @non_current_player))
     move
   end
 

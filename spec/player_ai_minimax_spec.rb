@@ -18,7 +18,7 @@ describe PlayerAiMinimax do
       expect(test_ai.mark).to eq(:X)
     end
   end
-  
+
   describe "Playing the last move " do
     it "plays 0 when that is the only space open " do
       (1..8).each { |i| spaces[i] = i }
@@ -143,6 +143,55 @@ describe PlayerAiMinimax do
         set_spaces(:O, [4])
         expect(test_ai.play_move(test_state)).to eq(2)
       end
+    end
+    describe "if opponent plays ajaacent corner ai plays opposite corner of its first move " do
+      it "returns 0 " do
+        set_spaces(:X, [8])
+        set_spaces(:O, [2])
+        expect(test_ai.play_move(test_state)).to eq(0)
+      end
+
+      it "returns 0 " do
+        set_spaces(:X, [8])
+        set_spaces(:O, [6])
+        expect(test_ai.play_move(test_state)).to eq(0)
+      end
+
+      it "returns 2 " do
+        set_spaces(:X, [6])
+        set_spaces(:O, [0])
+        expect(test_ai.play_move(test_state)).to eq(2)
+      end
+
+      it "returns 2 " do
+        set_spaces(:X, [6])
+        set_spaces(:O, [8])
+        expect(test_ai.play_move(test_state)).to eq(2)
+      end
+
+      it "returns 6 " do
+        set_spaces(:X, [2])
+        set_spaces(:O, [0])
+        expect(test_ai.play_move(test_state)).to eq(6)
+      end
+
+      it "returns 6 " do
+        set_spaces(:X, [2])
+        set_spaces(:O, [8])
+        expect(test_ai.play_move(test_state)).to eq(6)
+      end
+
+      it "returns 8 " do
+        set_spaces(:X, [0])
+        set_spaces(:O, [2])
+        expect(test_ai.play_move(test_state)).to eq(8)
+      end
+
+      it "returns 8 " do
+        set_spaces(:X, [0])
+        set_spaces(:O, [6])
+        expect(test_ai.play_move(test_state)).to eq(8)
+      end
 
     end
 
@@ -150,14 +199,56 @@ describe PlayerAiMinimax do
       it "returns adjacent corner when player 2 plays opposite corner " do
         set_spaces(:X, [0])
         set_spaces(:O, [8])
-        move = test_ai.play_move(test_state)
-        expect([2,6].include?(move)).to eq(true)
+        expect(test_ai.play_move(test_state)).to eq(6)
+      end
+
+      it "returns adjacent corner when player 2 plays opposite side " do
+        set_spaces(:X, [0])
+        set_spaces(:O, [5])
+        expect(test_ai.play_move(test_state)).to eq(2)
+      end
+
+      it "returns adjacent corner when player 2 plays opposite side " do
+        set_spaces(:X, [0])
+        set_spaces(:O, [7])
+        expect(test_ai.play_move(test_state)).to eq(2)
       end
 
       it "returns adjacent corner when player 2 plays opposite side " do
         set_spaces(:X, [2])
         set_spaces(:O, [3])
+        expect(test_ai.play_move(test_state)).to eq(0)
+      end
+
+      it "returns adjacent corner when player 2 plays opposite side " do
+        set_spaces(:X, [2])
+        set_spaces(:O, [7])
+        expect(test_ai.play_move(test_state)).to eq(0)
+      end
+
+      it "returns adjacent corner when player 2 plays opposite side " do
+        set_spaces(:X, [6])
+        set_spaces(:O, [1])
         expect(test_ai.play_move(test_state)).to eq(8)
+      end
+
+      it "returns adjacent corner when player 2 plays opposite side " do
+        set_spaces(:X, [6])
+        set_spaces(:O, [5])
+        expect(test_ai.play_move(test_state)).to eq(8)
+      end
+
+
+      it "returns adjacent corner when player 2 plays opposite side " do
+        set_spaces(:X, [8])
+        set_spaces(:O, [1])
+        expect(test_ai.play_move(test_state)).to eq(6)
+      end
+
+      it "returns adjacent corner when player 2 plays opposite side " do
+        set_spaces(:X, [8])
+        set_spaces(:O, [3])
+        expect(test_ai.play_move(test_state)).to eq(6)
       end
     end
   end
@@ -180,29 +271,47 @@ describe PlayerAiMinimax do
     end
   end
 
-  describe "Creating a Fork " do
-    it "plays 2 to create a fork " do
-      set_spaces(:X, [0, 6])
-      set_spaces(:O, [3, 8])
-      expect(test_ai.play_move(test_state)).to eq(2)
-    end
+  describe "Turn 5 " do
+    describe "creating forkss " do
+      it "plays 0 to create a fork " do
+        set_spaces(:X, [2,8])
+        set_spaces(:O, [5,6])
+        expect(test_ai.play_move(test_state)).to eq(0)
+      end
 
-    it "plays 8 to create a fork " do
-      set_spaces(:X, [0,6])
-      set_spaces(:O, [1,2,3])
-      expect(test_ai.play_move(test_state)).to eq(8)
-    end
+      it "plays 2 to create a fork " do
+        set_spaces(:X, [0, 6])
+        set_spaces(:O, [3, 8])
+        expect(test_ai.play_move(test_state)).to eq(2)
+      end
 
-    it "plays 6 to create a fork " do
-      set_spaces(:X, [0,8])
-      set_spaces(:O, [2,4])
-      expect(test_ai.play_move(test_state)).to eq(6)
-    end
+      it "plays 6 to create a fork " do
+        set_spaces(:X, [0,8])
+        set_spaces(:O, [2,4])
+        expect(test_ai.play_move(test_state)).to eq(6)
+      end
 
-    it "plays 0 to create a fork " do
-      set_spaces(:X, [2,8])
-      set_spaces(:O, [5,6])
-      expect(test_ai.play_move(test_state)).to eq(0)
+      it "plays 8 to create a fork " do
+        set_spaces(:X, [0, 6])
+        set_spaces(:O, [2, 3])
+        expect(test_ai.play_move(test_state)).to eq(8)
+      end
+    end
+  end
+
+  describe "Turn 6 " do
+    describe "creating forks " do
+      it "plays 8 to create a fork " do
+        set_spaces(:X, [0,6])
+        set_spaces(:O, [1,2,3])
+        expect(test_ai.play_move(test_state)).to eq(8)
+      end
+
+      it "plays 0 to create a fork " do
+        set_spaces(:X, [6,8])
+        set_spaces(:O, [2,5,7])
+        expect(test_ai.play_move(test_state)).to eq(0)
+      end
     end
   end
 
