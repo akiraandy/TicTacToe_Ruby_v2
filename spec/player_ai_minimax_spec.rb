@@ -21,17 +21,20 @@ describe PlayerAiMinimax do
 
   describe "Playing the last move " do
     it "plays 0 when that is the only space open " do
-      (1..8).each { |i| spaces[i] = i }
+      set_spaces(:O, [1,3,4,8])
+      set_spaces(:X, [2,5,6,7])
       expect(test_ai.play_move(test_state)).to eq(0)
     end
 
     it "plays 1 when that is the only space open " do
-      [0,2,3,4,5,6,7,8].each { |i| spaces[i] = i }
+      set_spaces(:O, [0,3,4,8])
+      set_spaces(:X, [2,5,6,7])
       expect(test_ai.play_move(test_state)).to eq(1)
     end
 
     it "plays 8 when that is the only space open " do
-      (1...8).each { |i| spaces[i] = i }
+      set_spaces(:O, [0,4,5,7])
+      set_spaces(:X, [1,2,3,6])
       expect(test_ai.play_move(test_state)).to eq(8)
     end
   end
