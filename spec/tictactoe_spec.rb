@@ -66,6 +66,7 @@ describe TicTacToe do
       subject.instance_variable_set("@board", board)
       expect(board).to receive(:valid_move?).with(0).and_return(true)
       expect(board).to receive(:spaces)
+      allow(players).to receive(:current_player)
       expect(players).to receive(:switch_turns)
       subject.play_human_move(0)
     end
