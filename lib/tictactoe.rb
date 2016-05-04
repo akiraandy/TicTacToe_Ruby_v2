@@ -7,7 +7,7 @@ require 'player_manager'
 
 class TicTacToe
 
-  def initialize()
+  def initialize
     @rules = GameRules.new
     @board = GameBoard.new
     @players = PlayerManager.new
@@ -17,10 +17,6 @@ class TicTacToe
 
   def new_game
     @board = GameBoard.new
-  end
-
-  def valid_move?(move)
-    @board.valid_move?(move)
   end
 
   def get_board
@@ -40,10 +36,14 @@ class TicTacToe
   end
 
   def play_human_move(move)
-    if @board.valid_move?(move)
+    if valid_move?(move)
       @board.play_move(@players.current_player.mark, move)
       @players.switch_turns
     end
+  end
+
+  def valid_move?(move)
+    @board.valid_move?(move)
   end
 
   def get_ai_player_move
