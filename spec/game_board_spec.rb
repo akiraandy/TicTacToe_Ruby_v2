@@ -31,6 +31,14 @@ describe GameBoard do
     end
   end
 
+  describe "Playing spaces with the play_move method" do
+    it "after play_move(:X, 0) spaces[0] = :X" do
+      test_board.play_move(:X, 0)
+      expect(test_board.spaces[0]).to eq(:X)
+    end
+  end
+
+
   describe "clearing board, checking full/empty, number of moves free " do
 
     it "available_moves returns an array of size 9 when board is empty " do

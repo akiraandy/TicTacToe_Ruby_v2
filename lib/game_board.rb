@@ -20,6 +20,10 @@ class GameBoard
     @spaces[space] == ' '
   end
 
+  def play_move(mark, move)
+    @spaces[move] = mark
+  end
+
   def available_moves
     rtn_moves = []
     @spaces.each.with_index do | val, i |

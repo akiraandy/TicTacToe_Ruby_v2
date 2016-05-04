@@ -41,7 +41,7 @@ class TicTacToe
 
   def play_human_move(move)
     if @board.valid_move?(move)
-      @board.spaces[move] = @players.current_player.mark
+      @board.play_move(@players.current_player.mark, move)
       @players.switch_turns
     end
   end
