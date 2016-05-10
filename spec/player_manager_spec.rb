@@ -1,42 +1,40 @@
 require 'player_manager'
 
 
-
 describe PlayerManager do
 
-  describe "Setting Player's mark and type" do
-    it "Default mark for player1 is :X" do
-      expect(subject.current_player.mark).to eq(:X)
+  let (:test_manager) { PlayerManager.new('HUMAN', 'EASY') }
+  let (:test_manager2) { PlayerManager.new('HARD', 'EASY') }
+  
+  describe "Constructor" do
+    it "creates a player 1 with a mark of :X" do 
+      expect(test_manager.current_player.mark).to eq(:X)
     end
 
-    it "Default mark for player2 is :O" do
-      expect(subject.non_current_player.mark).to eq(:O)
+    it "creates a player 2 with a mark of :O" do
+      test_manager.switch_turns
+      expect(test_manager.current_player.mark).to eq(:O)
+    end
+    
+    it "sets player 1 to Human when 'HUMAN' is argument 1 of constructor" do
+      expect(test_manager.current_player.type).to eq(:HUMAN)
     end
 
-    it "Default type for player1 is :Human" do
-     expect(subject.current_player.type).to eq(:Human)
+    it "sets player 2 to AiBasic class when 'EASY' is argument 2 of constructor" do
+      test_manager.switch_turns
+      expect(test_manager.current_player.type.class).to eq(AiBasic)
     end
 
-    it "Default type for player2 is :Human" do
-     expect(subject.non_current_player.type).to eq(:Human)
-    end
-
-    it "player1.type = :ai after set_player1_type is called" do
-      subject.set_player1_type(:ai)
-      expect(subject.current_player.type).to eq(:ai)
-    end
-
-    it "player2.type = :ai after set_player2_type is called" do
-      subject.set_player2_type(:ai)
-      expect(subject.non_current_player.type).to eq(:ai)
+    it "set player 1 to AiMinimax class when 'HARD' is argument 1 of constructor" do
+       expect(test_manager2.current_player.type.class).to eq(AiMinimax)
     end
   end
 
   describe "switching turns" do
     it "current_player = player2 after switch_turns is called" do
-      player2 = subject.non_current_player
-      subject.switch_turns
-      expect(subject.current_player).to eq(player2)
+      player2 = test_manager.non_current_player
+      test_manager.switch_turns
+      expect(test_manager.current_player).to eq(player2)
     end
   end
 end
