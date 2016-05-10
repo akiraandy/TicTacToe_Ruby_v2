@@ -1,18 +1,15 @@
-class PlayerAiBasic
-  attr_reader :mark
+class AiBasic
 
-  def initialize(mark, rules)
-    @mark = mark
+  def initialize(rules)
     @rules = rules
   end
 
-  def play_move(game_state)
+  def get_move(game_state)
     @board = game_state.game_board
     @spaces = game_state.game_board.spaces
     @available_moves = game_state.game_board.available_moves
     @player = game_state.player
     @opponent = game_state.opponent
-    choice = nil
     choice = get_corner if @board.empty?
     choice = play_to_win if choice.nil?
     choice = play_to_block if choice.nil?

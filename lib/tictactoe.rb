@@ -1,42 +1,58 @@
 require 'game_board'
 require 'game_rules'
+require 'game_state'
 require 'player_manager'
-require 'game_loop'
-require 'game_screen'
+
 class TicTacToe
 
-  attr_accessor :board, :game_loop
-
-  def initialize (game_io, player1, player2)
-
-    @io = game_io
-    @players = PlayerManager.new(@io, player1, player2)
-    @legend = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
-    @legend_size = 3
-    @board = GameBoard.new
+  def initialize(player1, player2)
     @rules = GameRules.new
-    @game_screen = GameScreen.new(@io, @board, @players, @rules, @legend, @legend_size)
-    @game_loop = GameLoop.new(@board, @game_screen, @rules, @players)
+    @board = GameBoard.new
+    @players = PlayerManager.new(player1, player2)
   end
 
-  def play_game
-    begin
-    @game_loop.game_loop
-    new_game
-    end while play_again?
+  def get_board
+    @board.spaces
+  end
+
+  def available_moves
+    @board.available_moves
+  end
+
+  def game_over?
+    @rules.game_over?(@board)
+  end
+
+  def tied_game?
+    @rules.tied?(@board)
+  end
+
+  def winner
+    @rules.winner(@board)
+  end
+
+  def play_move(move)
+    if valid_move?(move)
+      @board.play_move(@players.current_player.mark, move)
+      @players.switch_turns
+    end
+  end
+
+  def valid_move?(move)
+    @board.valid_move?(move)
+  end
+
+  def get_ai_player_move
+    @players.current_player.type.get_move(get_game_state) if is_current_player_ai?
+  end
+
+  def is_current_player_ai?
+    @players.current_player.type.respond_to?(:get_move)
   end
 
   private
- 
-  def new_game
-    @board = GameBoard.new
-    @game_screen.board = @board
-    @game_loop.board = @board
-  end
- 
-  def play_again?
-    @io.puts_message("Play again (Y/N) : ")
-    input = @io.get_input
-    ["Y", "y", "yes", "YES", "Yes"].include?(input)
+
+  def get_game_state
+    GameState.new(@board, @players.current_player.mark, @players.non_current_player.mark)
   end
 end

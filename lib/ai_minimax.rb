@@ -1,14 +1,12 @@
-class PlayerAiMinimax
-  attr_reader :mark
+class AiMinimax
 
   CORNERS = [0,2,6,8]
   OPPOSITE_CORNERS = [8,6,2,0]
-  def initialize(player_mark, board_rules)
-    @mark = player_mark
+  def initialize(board_rules)
     @rules = board_rules
   end
 
-  def play_move(game_state)
+  def get_move(game_state)
     @current_player = game_state.player
     @non_current_player = game_state.opponent
     board = game_state.game_board
