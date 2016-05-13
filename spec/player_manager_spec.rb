@@ -3,8 +3,8 @@ require 'player_manager'
 
 describe PlayerManager do
 
-  let (:test_manager) { PlayerManager.new('HUMAN', 'EASY') }
-  let (:test_manager2) { PlayerManager.new('HARD', 'EASY') }
+  let (:test_manager) { PlayerManager.new(:HUMAN, :EASY) }
+  let (:test_manager2) { PlayerManager.new(:HARD, :EASY) }
   
   describe "Constructor" do
     it "creates a player 1 with a mark of :X" do 

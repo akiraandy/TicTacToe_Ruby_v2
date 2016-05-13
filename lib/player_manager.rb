@@ -27,9 +27,9 @@ class PlayerManager
  
   def set_player1(type)
     case type
-    when "EASY"
+    when :EASY
       @player1 = Player.new(:X, AiBasic.new(@rules))
-    when "HARD"
+    when :HARD
       @player1 = Player.new(:X, AiMinimax.new(@rules))
     else 
       @player1 = Player.new(:X, :HUMAN)
@@ -38,9 +38,9 @@ class PlayerManager
 
   def set_player2(type)
     case type
-    when "EASY"
+    when :EASY
       @player2 = Player.new(:O, AiBasic.new(@rules))
-    when "HARD"
+    when :HARD
       @player2 = Player.new(:O, AiMinimax.new(@rules))
     else 
       @player2 = Player.new(:O, :HUMAN)
