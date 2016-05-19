@@ -7,8 +7,7 @@ class GameRules
   end
 
   def game_over?(board)
-    return true if (tied?(board) || winner(board))
-    false
+    tied?(board) || !!(winner(board))
   end
 
   def winner(board)
