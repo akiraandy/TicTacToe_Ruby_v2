@@ -19,6 +19,7 @@ class AiMinimax
 
   private
 
+  attr_reader :rules
   def first_move?(board)
     board.available_moves.size > 7
   end
@@ -49,7 +50,7 @@ class AiMinimax
   end
 
   def minimax(board, player, opponent, depth)
-    return score(board, depth) if @rules.game_over?(board)
+    return score(board, depth) if rules.game_over?(board)
     scores = []
     moves = []
     board.available_moves.each do |move|
@@ -68,7 +69,7 @@ class AiMinimax
   end
 
   def score(board, depth)
-    case @rules.winner(board)
+    case rules.winner(board)
     when @current_player
       10 - depth
     when @non_current_player
