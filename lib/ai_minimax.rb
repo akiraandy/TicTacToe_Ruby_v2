@@ -20,7 +20,6 @@ class AiMinimax
   private
 
   attr_reader :rules
-
   def first_move?(board)
     board.available_moves.size > 7
   end

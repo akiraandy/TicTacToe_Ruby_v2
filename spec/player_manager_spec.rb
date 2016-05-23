@@ -3,8 +3,8 @@ require 'player_manager'
 
 describe PlayerManager do
 
-  let (:test_manager) { PlayerManager.new('HUMAN', 'EASY') }
-  let (:test_manager2) { PlayerManager.new('HARD', 'EASY') }
+  let (:test_manager) { PlayerManager.new(:human, :easy) }
+  let (:test_manager2) { PlayerManager.new(:hard, :easy) }
   
   describe "Constructor" do
     it "creates a player 1 with a mark of :X" do 
@@ -16,16 +16,16 @@ describe PlayerManager do
       expect(test_manager.current_player.mark).to eq(:O)
     end
     
-    it "sets player 1 to Human when 'HUMAN' is argument 1 of constructor" do
-      expect(test_manager.current_player.type).to eq(:HUMAN)
+    it "sets player 1 to Human when 'human' is argument 1 of constructor" do
+      expect(test_manager.current_player.type).to eq(:human)
     end
 
-    it "sets player 2 to AiBasic class when 'EASY' is argument 2 of constructor" do
+    it "sets player 2 to AiBasic class when 'easy' is argument 2 of constructor" do
       test_manager.switch_turns
       expect(test_manager.current_player.type.class).to eq(AiBasic)
     end
 
-    it "set player 1 to AiMinimax class when 'HARD' is argument 1 of constructor" do
+    it "set player 1 to AiMinimax class when 'hard' is argument 1 of constructor" do
        expect(test_manager2.current_player.type.class).to eq(AiMinimax)
     end
   end
