@@ -26,7 +26,7 @@ class PlayerManager
   private
  
   def set_player1(type)
-    case type
+    case type.to_sym
     when :easy
       @player1 = Player.new(:X, AiBasic.new(@rules))
     when :hard
@@ -37,7 +37,7 @@ class PlayerManager
   end
 
   def set_player2(type)
-    case type
+    case type.to_sym
     when :easy
       @player2 = Player.new(:O, AiBasic.new(@rules))
     when :hard
