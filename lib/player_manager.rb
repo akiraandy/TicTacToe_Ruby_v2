@@ -7,7 +7,7 @@ class PlayerManager
   attr_reader :current_player
 
   Player = Struct.new(:mark, :type)
-  
+
   def initialize(player_type1, player_type2)
     @rules = GameRules.new
     @player1 = set_player(:X, player_type1)
@@ -15,7 +15,7 @@ class PlayerManager
     @current_player = @player1
   end
 
-   def non_current_player
+  def non_current_player
     (@current_player == @player1) ? @player2 : @player1
   end
 
@@ -24,7 +24,7 @@ class PlayerManager
   end
 
   private
- 
+
   def set_player(mark, type)
     case type.to_sym
     when :easy
