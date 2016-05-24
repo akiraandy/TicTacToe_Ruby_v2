@@ -8,10 +8,10 @@ class PlayerManager
 
   Player = Struct.new(:mark, :type)
   
-  def initialize(player1, player2)
+  def initialize(player_type1, player_type2)
     @rules = GameRules.new
-    set_player1(player1)
-    set_player2(player2)
+    @player1 = set_player(:X, player_type1)
+    @player2 = set_player(:O, player_type2)
     @current_player = @player1
   end
 
@@ -25,25 +25,14 @@ class PlayerManager
 
   private
  
-  def set_player1(type)
+  def set_player(mark, type)
     case type.to_sym
     when :easy
-      @player1 = Player.new(:X, AiBasic.new(@rules))
+      Player.new(mark, AiBasic.new(@rules))
     when :hard
-      @player1 = Player.new(:X, AiMinimax.new(@rules))
+      Player.new(mark, AiMinimax.new(@rules))
     else 
-      @player1 = Player.new(:X, :human)
-    end
-  end
-
-  def set_player2(type)
-    case type.to_sym
-    when :easy
-      @player2 = Player.new(:O, AiBasic.new(@rules))
-    when :hard
-      @player2 = Player.new(:O, AiMinimax.new(@rules))
-    else 
-      @player2 = Player.new(:O, :human)
+      Player.new(mark, :human)
     end
   end
 end
