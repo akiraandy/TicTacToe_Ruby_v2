@@ -39,9 +39,7 @@ class TicTacToe
     @board.valid_move?(move)
   end
   
-  private
-
   def get_game_state
-    GameState.new(@board, @players.current_player.mark, @players.non_current_player.mark)
+    GameState.new(@board, @board.current_player_mark, @board.non_current_player_mark)
   end
 end

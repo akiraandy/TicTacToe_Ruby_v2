@@ -21,8 +21,15 @@ class GameBoard
   end
 
   def play_move(move)
-    mark = (available_moves.size % 2 == 0 ? :O : :X)
-    spaces[move] = mark
+    spaces[move] = current_player_mark
+  end
+
+  def current_player_mark
+    available_moves.size % 2 == 0 ? :O : :X
+  end
+
+  def non_current_player_mark
+    current_player_mark == :X ? :O : :X
   end
 
   def available_moves
