@@ -46,7 +46,7 @@ describe GameBoard do
       test_board.play_move(0)
       expect(test_board.spaces[0]).to eq(:X)
     end
-     
+
     it "call to play_move(1) after play_move(0) set spaces[1] = :O" do
       test_board.play_move(0)
       test_board.play_move(1)
@@ -61,10 +61,20 @@ describe GameBoard do
     end
   end 
 
-describe "clearing board, checking full/empty, number of moves free " do
+  describe "clearing board, checking full/empty, number of moves free " do
 
-  it "available_moves returns an array of size 9 when board is empty " do
+    it "available_moves returns an array of size 9 when board is empty " do
       expect(test_board.available_moves.size).to eq(9)
+    end
+
+    it "available_moves returns an array of size 8 after 1 move is played" do
+      test_board.play_move(0)
+      expect(test_board.available_moves.size).to eq(8)
+    end
+
+    it "available_moves returns an array of size 1 if only 1 move is left" do
+      test_board.spaces = [" ","T","T","T","T","T","T","T","T"]
+      expect(test_board.available_moves.size).to eq(1)
     end
 
     it "full? returns true if board is full " do
