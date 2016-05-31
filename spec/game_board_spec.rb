@@ -11,6 +11,16 @@ describe GameBoard do
     end
   end
 
+  describe "player marks" do
+    it "returns :X for current_player_mark when no moves have been played" do
+      expect(test_board.current_player_mark).to eq(:X)
+    end
+
+    it "returns :O for non_current_players_mark when no moves have been played" do
+      expect(test_board.non_current_player_mark).to eq(:O)
+    end
+  end
+
   describe "playing spaces " do
     it "Has 9 spaces for a 3x3 board " do
       expect(test_board.size).to eq(9)
