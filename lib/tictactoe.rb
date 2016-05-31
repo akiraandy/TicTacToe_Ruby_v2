@@ -1,14 +1,12 @@
 require 'game_board'
 require 'game_rules'
 require 'game_state'
-require 'player_manager'
 
 class TicTacToe
 
-  def initialize(player1, player2)
-    @rules = GameRules.new
-    @board = GameBoard.new
-    @players = PlayerManager.new(player1, player2)
+  def initialize(rules, board)
+    @rules = rules
+    @board = board 
   end
 
   def get_board
@@ -33,23 +31,14 @@ class TicTacToe
 
   def play_move(move)
     if valid_move?(move)
-      @board.play_move(@players.current_player.mark, move)
-      @players.switch_turns
+      @board.play_move(move)
     end
   end
 
   def valid_move?(move)
     @board.valid_move?(move)
   end
-
-  def get_ai_player_move
-    @players.current_player.type.get_move(get_game_state) if is_current_player_ai?
-  end
-
-  def is_current_player_ai?
-    @players.current_player.type.respond_to?(:get_move)
-  end
-
+  
   private
 
   def get_game_state

@@ -33,7 +33,7 @@ describe GameBoard do
 
   describe "Playing spaces with the play_move method" do
     it "after play_move(:X, 0) spaces[0] = :X" do
-      test_board.play_move(:X, 0)
+      test_board.play_move(0)
       expect(test_board.spaces[0]).to eq(:X)
     end
   end

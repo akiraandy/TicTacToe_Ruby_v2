@@ -20,8 +20,9 @@ class GameBoard
     @spaces[space] == ' '
   end
 
-  def play_move(mark, move)
-    @spaces[move] = mark
+  def play_move(move)
+    mark = (available_moves.size % 2 == 0 ? :O : :X)
+    spaces[move] = mark
   end
 
   def available_moves
