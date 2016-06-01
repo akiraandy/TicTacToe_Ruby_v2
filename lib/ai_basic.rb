@@ -25,12 +25,19 @@ private
   end
 
   def get_corner(board, available_moves)
-    corners = [0, 2, 6, 8]
-    available_corners =  corners & available_moves
+    available_corners =  corners(board.grid_size) & available_moves
     if available_corners.size > 0
       index = rand(0...available_corners.size)
       available_corners[index]
     end
+  end
+
+  def corners(grid_size)
+    rtn_corners = [0]
+    rtn_corners << grid_size - 1
+    rtn_corners << (grid_size * grid_size) - grid_size
+    rtn_corners << (grid_size * grid_size) - 1
+    rtn_corners
   end
 
   def play_to_block(board, available_moves)

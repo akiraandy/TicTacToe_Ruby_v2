@@ -11,17 +11,31 @@ describe AiBasic do
   let (:test_ai2) { AiBasic.new( rules) }
   let (:test_state) { GameState.new(board , :X, :O) }
   let(:spaces) { test_state.game_board.spaces }
-  let(:corners) { [0, 2, 6, 8] }
 
   describe "Plays a corner " do
-    it "returns a corner on empty board " do
-      test_for_true = corners.include?(test_ai.get_move(test_state))
+    let (:board_4x4) { GameBoard.new(4) }
+    let (:test_state_4x4) { GameState.new(board_4x4, :X, :O) }
+    let(:corners_4x4_board) { [0, 3, 12, 15] }
+    let(:corners_3x3_board) { [0, 2, 6, 8] }
+
+    it "returns a corner on empty board 4x4 board" do
+      test_for_true = corners_4x4_board.include?(test_ai.get_move(test_state_4x4))
       expect(test_for_true).to eq(true)
     end
 
-    it "returns a corner if only move played so far is center " do
+    it "returns a corner on empty board 3x3 board" do
+      test_for_true = corners_3x3_board.include?(test_ai.get_move(test_state))
+      expect(test_for_true).to eq(true)
+    end
+
+    it "returns a corner on empty board 3x3 board" do
+      test_for_true = corners_3x3_board.include?(test_ai.get_move(test_state))
+      expect(test_for_true).to eq(true)
+    end
+
+    it "returns a corner if only move played so far is center on a 3x3 board" do
       spaces[4] = :O
-      test_for_true = corners.include?(test_ai.get_move(test_state))
+      test_for_true = corners_3x3_board.include?(test_ai.get_move(test_state))
       expect(test_for_true).to eq(true)
     end
   end
