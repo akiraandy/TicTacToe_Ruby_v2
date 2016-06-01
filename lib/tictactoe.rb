@@ -5,10 +5,10 @@ require 'player_manager'
 
 class TicTacToe
 
-  def initialize(player1, player2)
-    @rules = GameRules.new
-    @board = GameBoard.new
-    @players = PlayerManager.new(player1, player2)
+  def initialize(player_manager, board, rules)
+    @rules = rules
+    @board = board
+    @players = player_manager
   end
 
   def get_board
