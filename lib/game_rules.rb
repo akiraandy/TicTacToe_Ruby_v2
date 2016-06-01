@@ -1,5 +1,3 @@
-require 'game_board'
-
 class GameRules
 
   def tied?(board)
