@@ -23,8 +23,8 @@ describe GameRules do
   end
 
   describe "testing winner " do
-    it "Returns false when there is no winner " do
-      expect(test_rules.winner(test_board)).to eq(false)
+    it "Returns nil when there is no winner " do
+      expect(test_rules.winner(test_board)).to eq(nil)
     end
     it "Returns 'X' if player x has 3 in first col " do
       test_board.spaces[0] = 'X'
