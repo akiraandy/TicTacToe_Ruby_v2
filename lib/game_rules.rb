@@ -19,6 +19,7 @@ private
     return spaces[i] if [spaces[i], spaces[i + 3], spaces[i + 6]].uniq.length == 1 && \
       spaces[i] != ' '
     end
+    nil
   end
 
   def check_win_row(spaces)
@@ -26,6 +27,7 @@ private
     return spaces[i] if [spaces[i], spaces[i + 1], spaces[i + 2]].uniq.length == 1 && \
       spaces[i] != ' '
     end
+    nil
   end
 
   def check_win_diagonal(spaces)
