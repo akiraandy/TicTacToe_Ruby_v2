@@ -16,6 +16,15 @@ class GameBoard
     temp_board
   end
 
+  def corners
+    rtn_corners = [0]
+    rtn_corners << grid_size - 1
+    rtn_corners << (grid_size * grid_size) - grid_size
+    rtn_corners << (grid_size * grid_size) - 1
+    rtn_corners
+  end
+
+
   def valid_move?(space)
     @spaces[space] == ' '
   end

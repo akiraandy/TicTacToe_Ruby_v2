@@ -2,12 +2,23 @@ require 'game_board'
 
 describe GameBoard do
   let(:test_board) { GameBoard.new(3) }
+  let(:test_board_4x4) { GameBoard.new(4) }
 
   describe "deep copy " do
     it "makes a deep copy " do
       test_board_2 = test_board.deep_copy
       test_board.spaces[1] = 'X'
       expect(test_board_2.spaces[1]).to eq(' ')
+    end
+  end
+
+  describe "getting corners" do
+    it "returns 0 2 6 8 for a 3x3 board" do
+      expect(test_board.corners).to eq([0, 2, 6, 8])
+    end
+
+    it "reutrns 0 3 12 15 for a 4x4 board" do
+      expect(test_board_4x4.corners).to eq([0, 3, 12, 15])
     end
   end
 

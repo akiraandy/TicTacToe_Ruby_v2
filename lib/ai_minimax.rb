@@ -1,7 +1,5 @@
 class AiMinimax
 
-  CORNERS = [0,2,6,8]
-  OPPOSITE_CORNERS = [8,6,2,0]
   def initialize(board_rules)
     @rules = board_rules
   end
@@ -29,12 +27,12 @@ class AiMinimax
   end
 
   def corner_move(board)
-    available_corners = CORNERS & board.available_moves
+    available_corners = board.corners & board.available_moves
     available_corners.sample
   end
 
   def opponent_played_corner_for_first_move?(board)
-    CORNERS.any? { |corner| board.spaces[corner] != ' '} if (board.available_moves.size == 8)
+    board.corners.any? { |corner| board.spaces[corner] != ' '} if (board.available_moves.size == 8)
   end
 
   def best_move(board, player, opponent)
